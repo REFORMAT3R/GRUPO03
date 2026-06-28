@@ -21,11 +21,19 @@ export const routes: Routes = [
     component: FormularioPacienteComponent
   },
   {
+    path: 'pacientes/editar',
+    component: FormularioPacienteComponent
+  },
+  {
     path: 'citas',
     component: ListaCitasComponent
   },
   {
     path: 'citas/nuevo',
+    component: FormularioCitaComponent
+  },
+  {
+    path: 'citas/editar',
     component: FormularioCitaComponent
   }
 ];
