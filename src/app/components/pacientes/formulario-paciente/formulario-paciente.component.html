@@ -1,19 +1,38 @@
-<h2>Registro de Paciente</h2>
+<div class="tarjeta-clinica contenedor-formulario">
+  <div class="cabecera-tabla">
+    <h3>{{ esEdicion ? 'Editar Paciente' : 'Registro de Paciente' }}</h3>
+    <a class="btn btn-eliminar" routerLink="/pacientes">Cancelar</a>
+  </div>
 
-<form (ngSubmit)="guardarPaciente()">
+  <form #formPac="ngForm" (ngSubmit)="formPac.valid && guardarPaciente()" class="cuerpo-formulario">
+    
+    <div class="campo-grupo">
+      <label>Nombre:</label>
+      <input type="text" [(ngModel)]="paciente.nombre" name="nombre" required #nom="ngModel">
+      <small *ngIf="nom.invalid && nom.touched" class="error-texto">El nombre es obligatorio.</small>
+    </div>
 
-  <input type="text" [(ngModel)]="paciente.nombre" name="nombre" placeholder="Nombre">
-  <br>
+    <div class="campo-grupo">
+      <label>Apellido:</label>
+      <input type="text" [(ngModel)]="paciente.apellido" name="apellido" required #ape="ngModel">
+      <small *ngIf="ape.invalid && ape.touched" class="error-texto">El apellido es obligatorio.</small>
+    </div>
 
-  <input type="text" [(ngModel)]="paciente.apellido" name="apellido" placeholder="Apellido">
-  <br>
+    <div class="campo-grupo">
+      <label>DNI (8 dígitos):</label>
+      <input type="text" [(ngModel)]="paciente.dni" name="dni" required minlength="8" maxlength="8" pattern="[0-9]*" #dniInput="ngModel">
+      <small *ngIf="dniInput.invalid && dniInput.touched" class="error-texto">Debe ingresar un DNI válido de 8 números.</small>
+    </div>
 
-  <input type="text" [(ngModel)]="paciente.dni" name="dni" placeholder="DNI">
-  <br>
+    <div class="campo-grupo">
+      <label>Teléfono:</label>
+      <input type="text" [(ngModel)]="paciente.telefono" name="telefono" pattern="[0-9]*" #tel="ngModel">
+      <small *ngIf="tel.invalid && tel.touched" class="error-texto">Solo se permiten números.</small>
+    </div>
 
-  <input type="text" [(ngModel)]="paciente.telefono" name="telefono" placeholder="Teléfono">
-  <br>
+    <button type="submit" [disabled]="formPac.invalid" class="btn btn-guardar">
+      {{ esEdicion ? 'Guardar Cambios' : 'Registrar Paciente' }}
+    </button>
 
-  <button type="submit">Guardar</button>
-
-</form>
+  </form>
+</div>
