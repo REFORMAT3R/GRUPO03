@@ -1,19 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm mb-4">
-  <div class="container">
-    <a class="navbar-brand fw-bold" routerLink="/">🏥 Clínica Moisés Heresi</a>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/pacientes" routerLinkActive="active">Pacientes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/citas" routerLinkActive="active">Citas Médicas</a>
-        </li>
-      </ul>
+<nav class="menu-clinica">
+  <div class="contenedor-menu">
+    <a routerLink="/" class="logo">Clínica Moisés Heresi</a>
+    <div class="enlaces">
+      <a routerLink="/pacientes" routerLinkActive="activo">Pacientes</a>
+      <a routerLink="/citas" routerLinkActive="activo">Citas Médicas</a>
     </div>
   </div>
 </nav>
 
-<div class="container">
+<div class="contenedor-principal">
   <router-outlet></router-outlet>
 </div>
