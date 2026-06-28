@@ -20,10 +20,23 @@ class Paciente(models.Model):
         return f"{self.nombres} {self.apellidos}"
 
 
-class Psiquiatra(models.Model):
+class Doctores(models.Model):
+    ESPEC_CHOICES = [
+        ('PSIQUIATRIA_AGUDOS', 'Psiquiatría de Agudos'),
+        ('PSIQUIATRIA_CRONICOS', 'Psiquiatría de Larga Estancia'),
+        ('PSIQUIATRIA_ENLACE', 'Psiquiatría de Enlace'),
+        ('PSICOLOGIA_CLINICA', 'Psicología Clínica'),
+        ('NEUROPSICOLOGIA', 'Neuropsicología'),
+        ('TERAPIA_OCUPACIONAL', 'Terapia Ocupacional'),
+        ('ENFERMERIA_PSIQUIATRICA', 'Enfermería Psiquiátrica'),
+        ('TRABAJO_SOCIAL', 'Trabajo Social Psiquiátrico'),
+        ('NEUROLOGIA', 'Neurología'),
+        ('MEDICINA_INTERNA', 'Medicina Interna'),
+    ]
+
     nombres = models.CharField(max_length=100)
     apellidos = models.CharField(max_length=100)
-    especialidad = models.CharField(max_length=100)
+    especialidad = models.CharField(max_length=100, choices=ESPEC_CHOICES)
     telefono = models.CharField(max_length=15)
     correo = models.EmailField()
 
@@ -45,8 +58,8 @@ class Cita(models.Model):
         related_name='citas'
     )
 
-    psiquiatra = models.ForeignKey(
-        Psiquiatra,
+    doctores = models.ForeignKey(
+        Doctores,
         on_delete=models.CASCADE,
         related_name='citas'
     )
