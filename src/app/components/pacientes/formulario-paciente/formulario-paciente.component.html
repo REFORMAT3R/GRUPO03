@@ -1,0 +1,19 @@
+<h2>Registro de Paciente</h2>
+
+<form (ngSubmit)="guardarPaciente()">
+
+  <input type="text" [(ngModel)]="paciente.nombre" name="nombre" placeholder="Nombre">
+  <br>
+
+  <input type="text" [(ngModel)]="paciente.apellido" name="apellido" placeholder="Apellido">
+  <br>
+
+  <input type="text" [(ngModel)]="paciente.dni" name="dni" placeholder="DNI">
+  <br>
+
+  <input type="text" [(ngModel)]="paciente.telefono" name="telefono" placeholder="Teléfono">
+  <br>
+
+  <button type="submit">Guardar</button>
+
+</form>
