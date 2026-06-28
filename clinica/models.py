@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import RegexValidator
 
 # Create your models here.
 class Paciente(models.Model):
@@ -8,19 +9,52 @@ class Paciente(models.Model):
         ('O', 'Otro'),
     ]
 
-    dni = models.CharField(max_length=8, unique=True)
-    nombres = models.CharField(max_length=100)
-    apellidos = models.CharField(max_length=100)
+    dni_validator = RegexValidator(
+        regex=r'^\d{8}$',
+        message="El DNI debe tener exactamente 8 números."
+    )
+
+    dni = models.CharField(
+        max_length=8,
+        unique=True,
+        validators=[dni_validator]
+    )
+
+    texto_validator = RegexValidator(
+        regex=r'^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$',
+        message="Solo se permiten letras y espacios."
+    )
+
+    nombres = models.CharField(
+        max_length=100,
+        validators=[texto_validator]
+    )
+
+    apellidos = models.CharField(
+        max_length=100,
+        validators=[texto_validator]
+    )
+    
     fecha_nacimiento = models.DateField()
     sexo = models.CharField(max_length=1, choices=SEXO_CHOICES)
-    telefono = models.CharField(max_length=15)
+
+    telefono_validator = RegexValidator(
+        regex=r'^9\d{8}$',
+        message="El teléfono debe empezar con 9 y tener exactamente 9 dígitos."
+    )
+
+    telefono = models.CharField(
+        max_length=9,
+        validators=[telefono_validator]
+    )
+
     fecha_registro = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.nombres} {self.apellidos}"
 
 
-class Doctores(models.Model):
+class Doctor(models.Model):
     ESPEC_CHOICES = [
         ('PSIQUIATRIA_AGUDOS', 'Psiquiatría de Agudos'),
         ('PSIQUIATRIA_CRONICOS', 'Psiquiatría de Larga Estancia'),
@@ -34,10 +68,30 @@ class Doctores(models.Model):
         ('MEDICINA_INTERNA', 'Medicina Interna'),
     ]
 
-    nombres = models.CharField(max_length=100)
-    apellidos = models.CharField(max_length=100)
+    texto_validator = RegexValidator(
+        regex=r'^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$',
+        message="Solo se permiten letras y espacios."
+    )
+
+    nombres = models.CharField(
+        max_length=100,
+        validators=[texto_validator]
+    )
+    apellidos = models.CharField(
+        max_length=100,
+        validators=[texto_validator]
+    )
     especialidad = models.CharField(max_length=100, choices=ESPEC_CHOICES)
-    telefono = models.CharField(max_length=15)
+    telefono_validator = RegexValidator(
+        regex=r'^9\d{8}$',
+        message="El teléfono debe empezar con 9 y tener exactamente 9 dígitos."
+    )
+
+    telefono = models.CharField(
+        max_length=9,
+        validators=[telefono_validator]
+    )
+
     correo = models.EmailField()
 
     def __str__(self):
@@ -58,8 +112,8 @@ class Cita(models.Model):
         related_name='citas'
     )
 
-    doctores = models.ForeignKey(
-        Doctores,
+    doctor = models.ForeignKey(
+        Doctor,
         on_delete=models.CASCADE,
         related_name='citas'
     )

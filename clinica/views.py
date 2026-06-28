@@ -1,8 +1,8 @@
 from rest_framework import viewsets
-from .models import Paciente, Psiquiatra, Consulta, Cita
+from .models import Doctor, Paciente, Consulta, Cita
 from .serializers import (
     PacienteSerializer,
-    PsiquiatraSerializer,
+    DoctorSerializer,
     CitaSerializer,
     ConsultaSerializer
 )
@@ -14,9 +14,9 @@ class PacienteViewSet(viewsets.ModelViewSet):
     serializer_class = PacienteSerializer
 
 
-class PsiquiatraViewSet(viewsets.ModelViewSet):
-    queryset = Psiquiatra.objects.all()
-    serializer_class = PsiquiatraSerializer
+class DoctorViewSet(viewsets.ModelViewSet):
+    queryset = Doctor.objects.all()
+    serializer_class = DoctorSerializer
 
 
 class CitaViewSet(viewsets.ModelViewSet):
