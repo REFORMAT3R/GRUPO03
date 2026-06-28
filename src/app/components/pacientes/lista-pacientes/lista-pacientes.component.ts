@@ -1,62 +1,55 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 
 import { PacienteService } from '../../../services/paciente.service';
 import { Paciente } from '../../../models/paciente';
 
-
 @Component({
   selector: 'app-lista-pacientes',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './lista-pacientes.component.html',
   styleUrl: './lista-pacientes.component.css'
 })
 export class ListaPacientesComponent implements OnInit {
 
-  editarPaciente(p: Paciente) {
-  this.pacienteService.setPacienteEditar(p);
-}
-
-
   pacientes: Paciente[] = [];
 
-
   constructor(
-    private pacienteService: PacienteService
+    private pacienteService: PacienteService,
+    private router: Router 
   ) {}
 
-
   ngOnInit(): void {
-
     this.cargarPacientes();
-
   }
 
+  editarPaciente(p: Paciente) {
+    this.pacienteService.setPacienteEditar(p);
+    this.router.navigate(['/pacientes/editar']);
+  }
 
   cargarPacientes() {
-
-  console.log('🔵 llamando servicio...');
-
-  this.pacienteService.getPacientes()
-    .subscribe({
-      next: (data) => {
-        console.log('🟢 DATA REAL:', data);
-        this.pacientes = data;
-      },
-      error: (err) => {
-        console.log('🔴 ERROR:', err);
-      }
-    });
-
-}
+    console.log('🔵 llamando servicio...');
+    this.pacienteService.getPacientes()
+      .subscribe({
+        next: (data) => {
+          console.log('🟢 DATA REAL:', data);
+          this.pacientes = data;
+        },
+        error: (err) => {
+          console.log('🔴 ERROR:', err);
+        }
+      });
+  }
 
   eliminarPaciente(id: number) {
-  this.pacienteService.eliminarPaciente(id)
-    .subscribe(() => {
-      this.cargarPacientes(); // recarga lista
-    });
-}
-
-
+    if (confirm('¿Desea eliminar este registro de la clínica Moisés Heresi?')) {
+      this.pacienteService.eliminarPaciente(id)
+        .subscribe(() => {
+          this.cargarPacientes();
+        });
+    }
+  }
 }
