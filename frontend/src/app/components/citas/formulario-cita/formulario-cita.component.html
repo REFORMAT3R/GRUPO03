@@ -4,7 +4,7 @@
     <a class="btn btn-eliminar" routerLink="/citas">Cancelar</a>
   </div>
 
-  <form #formCita="ngForm" (ngSubmit)="formCita.valid && guardarCita()" class="cuerpo-formulario">
+  <form #formCita="ngForm" class="cuerpo-formulario">
     
     <div class="campo-grupo">
       <label>ID del Paciente:</label>
@@ -13,9 +13,21 @@
     </div>
 
     <div class="campo-grupo">
-      <label>Fecha y Hora:</label>
-      <input type="datetime-local" [(ngModel)]="cita.fecha" name="fecha" required #fec="ngModel">
-      <small *ngIf="fec.invalid && fec.touched" class="error-texto">La fecha y hora de la cita son obligatorias.</small>
+      <label>ID del Doctor:</label>
+      <input type="number" [(ngModel)]="cita.doctor" name="doctor" required min="1" #doc="ngModel">
+      <small *ngIf="doc.invalid && doc.touched" class="error-texto">Debe ingresar un ID numérico de doctor válido.</small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Fecha de la Cita:</label>
+      <input type="date" [(ngModel)]="cita.fecha" name="fecha" required #fec="ngModel">
+      <small *ngIf="fec.invalid && fec.touched" class="error-texto">La fecha de la cita es obligatoria.</small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Hora de la Cita:</label>
+      <input type="time" [(ngModel)]="cita.hora" name="hora" required #hor="ngModel">
+      <small *ngIf="hor.invalid && hor.touched" class="error-texto">La hora de la cita es obligatoria.</small>
     </div>
 
     <div class="campo-grupo">
@@ -24,7 +36,7 @@
       <small *ngIf="mot.invalid && mot.touched" class="error-texto">El motivo de la consulta es obligatorio.</small>
     </div>
 
-    <button type="submit" [disabled]="formCita.invalid" class="btn btn-guardar">
+    <button type="button" (click)="guardarCita()" class="btn btn-guardar">
       {{ esEdicion ? 'Actualizar Cita' : 'Confirmar Cita Médica' }}
     </button>
 

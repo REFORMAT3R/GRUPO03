@@ -1,0 +1,19 @@
+/* Color Azul Oscuro para Personal Médico */
+.cabecera-azul {
+  background-color: #1e3c72 !important;
+}
+
+.cabecera-azul .btn-nuevo {
+  color: #1e3c72 !important;
+  background-color: #ffffff;
+}
+
+.texto-negrita {
+  font-weight: bold;
+}
+
+.tabla-vacia {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+}

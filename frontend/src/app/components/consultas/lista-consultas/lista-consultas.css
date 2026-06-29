@@ -1,0 +1,19 @@
+/* Color Morado para Consultas / Historiales */
+.cabecera-morada {
+  background-color: #8e44ad !important;
+}
+
+.cabecera-morada .btn-nuevo {
+  color: #8e44ad !important;
+  background-color: #ffffff;
+}
+
+.texto-negrita {
+  font-weight: bold;
+}
+
+.tabla-vacia {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+}

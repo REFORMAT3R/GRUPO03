@@ -1,0 +1,43 @@
+<div class="tarjeta-clinica contenedor-formulario">
+  <div class="cabecera-tabla cabecera-morada">
+    <h3>{{ esEdicion ? 'Modificar Registro Clínico' : 'Registrar Hoja de Consulta' }}</h3>
+    <a class="btn btn-eliminar" routerLink="/consultas">Cancelar</a>
+  </div>
+
+  <form #formCons="ngForm" class="cuerpo-formulario">
+    
+    <div class="campo-grupo">
+      <label>ID de la Cita Médica a Vincular:</label>
+      <input type="number" [(ngModel)]="consulta.cita" name="cita" required min="1" #cit="ngModel">
+      <small *ngIf="cit.invalid && cit.touched" class="error-texto">Debe ingresar un ID numérico de cita válido.</small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Diagnóstico Médico:</label>
+      <textarea [(ngModel)]="consulta.diagnostico" name="diagnostico" required rows="3" #diag="ngModel"></textarea>
+      <small *ngIf="diag.invalid && diag.touched" class="error-texto">El diagnóstico es obligatorio.</small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Plan de Tratamiento:</label>
+      <textarea [(ngModel)]="consulta.treatment" [(ngModel)]="consulta.tratamiento" name="tratamiento" required rows="3" #trat="ngModel"></textarea>
+      <small *ngIf="trat.invalid && trat.touched" class="error-texto">El plan de tratamiento es obligatorio.</small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Medicamentos Recetados:</label>
+      <textarea [(ngModel)]="consulta.medicamentos" name="medicamentos" required rows="2" #med="ngModel"></textarea>
+      <small *ngIf="med.invalid && med.touched" class="error-texto">Debe indicar los medicamentos o colocar 'Ninguno'.</small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Observaciones Adicionales (Opcional):</label>
+      <textarea [(ngModel)]="consulta.observaciones" name="observaciones" rows="2"></textarea>
+    </div>
+
+    <button type="button" (click)="guardarConsulta()" class="btn btn-guardar">
+      {{ esEdicion ? 'Actualizar Historial' : 'Finalizar y Guardar Consulta' }}
+    </button>
+
+  </form>
+</div>

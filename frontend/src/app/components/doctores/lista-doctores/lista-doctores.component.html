@@ -1,0 +1,37 @@
+<div class="tarjeta-clinica">
+  <div class="cabecera-tabla cabecera-azul">
+    <h3>Personal Médico - Personal Registrado</h3>
+    <a class="btn btn-nuevo" routerLink="/doctores/nuevo">+ Registrar Médico</a>
+  </div>
+  
+  <table class="tabla-datos">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Doctor(a)</th>
+        <th>Especialidad</th>
+        <th>Teléfono</th>
+        <th>Correo Electrónico</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let doc of doctores">
+        <td>{{ doc.id }}</td>
+        <td class="texto-negrita">Dr(a). {{ doc.nombres }} {{ doc.apellidos }}</td>
+        <td>{{ doc.especialidad }}</td>
+        <td>{{ doc.telefono }}</td>
+        <td>{{ doc.correo }}</td>
+        <td>
+          <button class="btn btn-editar" [routerLink]="['/doctores/editar']">Editar</button>
+          <button class="btn btn-eliminar" (click)="eliminarDoctor(doc.id)">Eliminar</button>
+        </td>
+      </tr>
+      <tr *ngIf="doctores.length === 0">
+        <td colspan="6" class="tabla-vacia">
+          No hay médicos registrados en el sistema.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

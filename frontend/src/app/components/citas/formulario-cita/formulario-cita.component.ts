@@ -1,23 +1,26 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { CitaService } from '../../../services/cita.service';
-import { Cita } from '../../../models/cita';
 
 @Component({
   selector: 'app-formulario-cita',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './formulario-cita.component.html',
   styleUrl: './formulario-cita.component.css'
 })
 export class FormularioCitaComponent {
 
-  cita: Cita = {
-    fecha: '',
+  cita: any = {
+    paciente: '',        
+    doctor: '',        
+    fecha: '',       
+    hora: '',        
     motivo: '',
-    paciente: 0
+    estado: 'PENDIENTE' 
   };
 
   esEdicion: boolean = false;
@@ -26,33 +29,43 @@ export class FormularioCitaComponent {
   constructor(private citaService: CitaService) {}
 
   guardarCita() {
-
+    // Modo Edición (PUT)
     if (this.esEdicion && this.idCita) {
-
       this.citaService.actualizarCita(this.idCita, this.cita)
-        .subscribe(() => {
-          alert('Cita actualizada');
-          this.reset();
+        .subscribe({
+          next: () => {
+            alert('Cita actualizada');
+            this.reset();
+          },
+          error: (err) => {
+            console.error(err);
+          }
         });
-
-    } else {
-
+    } 
+    // Modo Creación (POST)
+    else {
       this.citaService.crearCita(this.cita)
-        .subscribe(() => {
-          alert('Cita creada');
-          this.reset();
+        .subscribe({
+          next: () => {
+            alert('Cita creada');
+            this.reset();
+          },
+          error: (err) => {
+            console.error(err);
+          }
         });
-
     }
   }
 
   reset() {
     this.cita = {
+      paciente: '',
+      doctor: '',
       fecha: '',
+      hora: '',
       motivo: '',
-      paciente: 0
+      estado: 'PENDIENTE'
     };
-
     this.esEdicion = false;
     this.idCita = null;
   }

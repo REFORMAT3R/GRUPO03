@@ -1,0 +1,19 @@
+/* Color Verde para Citas Médicas */
+.cabecera-verde {
+  background-color: #2ecc71 !important;
+}
+
+.cabecera-verde .btn-nuevo {
+  color: #2ecc71 !important;
+  background-color: #ffffff;
+}
+
+.texto-negrita {
+  font-weight: bold;
+}
+
+.tabla-vacia {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+}

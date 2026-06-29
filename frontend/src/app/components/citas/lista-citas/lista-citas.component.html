@@ -1,7 +1,7 @@
 <div class="tarjeta-clinica">
-  <div class="cabecera-tabla" style="background-color: #2ecc71;">
+  <div class="cabecera-tabla cabecera-verde">
     <h3>Agenda de Citas Médicas - Moisés Heresi</h3>
-    <a class="btn btn-nuevo" routerLink="/citas/nuevo" style="color: #2ecc71;">+ Agendar Cita</a>
+    <a class="btn btn-nuevo" routerLink="/citas/nuevo">+ Agendar Cita</a>
   </div>
   
   <table class="tabla-datos">
@@ -17,7 +17,7 @@
     <tbody>
       <tr *ngFor="let c of citas">
         <td>{{ c.id }}</td>
-        <td style="font-weight: bold;">{{ c.paciente }}</td>
+        <td class="texto-negrita">{{ c.paciente }}</td>
         <td>{{ c.fecha }}</td>
         <td>{{ c.motivo || 'Consulta General' }}</td>
         <td>
@@ -26,7 +26,7 @@
         </td>
       </tr>
       <tr *ngIf="citas.length === 0">
-        <td colspan="5" style="text-align: center; padding: 20px; color: #777;">
+        <td colspan="5" class="tabla-vacia">
           No hay citas médicas programadas en el sistema.
         </td>
       </tr>
