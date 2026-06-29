@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -15,7 +15,10 @@ export class ListaConsultasComponent implements OnInit {
 
   consultas: any[] = [];
 
-  constructor(private consultaService: ConsultaService) {}
+  constructor(
+    private consultaService: ConsultaService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.obtenerConsultas();
@@ -23,8 +26,12 @@ export class ListaConsultasComponent implements OnInit {
 
   obtenerConsultas(): void {
     this.consultaService.getConsultas().subscribe({
-      next: (data) => this.consultas = data,
+      next: (data) => {
+        this.consultas = data,
+        this.cdr.detectChanges();
+      },
       error: (err) => console.error(err)
+      
     });
   }
 

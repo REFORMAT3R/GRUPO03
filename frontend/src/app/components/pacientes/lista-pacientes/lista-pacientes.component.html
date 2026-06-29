@@ -8,8 +8,8 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
+        <th>Nombres</th>
+        <th>Apellidos</th>
         <th>DNI</th>
         <th>Teléfono</th>
         <th>Acciones</th>
@@ -18,8 +18,8 @@
     <tbody>
       <tr *ngFor="let p of pacientes">
         <td>{{ p.id }}</td>
-        <td style="font-weight: bold;">{{ p.nombre }}</td>
-        <td>{{ p.apellido }}</td>
+        <td style="font-weight: bold;">{{ p.nombres }}</td>
+        <td>{{ p.apellidos }}</td>
         <td>{{ p.dni }}</td>
         <td>{{ p.telefono || 'Sin registrar' }}</td>
         <td>

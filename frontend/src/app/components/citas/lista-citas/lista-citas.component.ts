@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 
@@ -18,7 +18,8 @@ export class ListaCitasComponent implements OnInit {
 
   constructor(
     private citaService: CitaService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +34,7 @@ export class ListaCitasComponent implements OnInit {
   cargarCitas() {
     this.citaService.getCitas().subscribe(data => {
       this.citas = data;
+      this.cdr.detectChanges();
     });
   }
 

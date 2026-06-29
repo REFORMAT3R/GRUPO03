@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 
 import { DoctorService } from '../../../services/doctor.service'; 
 
@@ -12,7 +12,7 @@ import { DoctorService } from '../../../services/doctor.service';
   templateUrl: './formulario-doctor.component.html',
   styleUrl: './formulario-doctor.component.css'
 })
-export class FormularioDoctorComponent {
+export class FormularioDoctorComponent{
 
   doctor: any = {
     nombres: '',

@@ -3,4 +3,5 @@ export interface Cita {
   fecha: string;
   motivo: string;
   paciente: number;
+  doctor: number; 
 }

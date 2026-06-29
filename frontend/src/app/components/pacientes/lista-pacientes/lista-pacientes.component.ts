@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 
@@ -18,7 +18,8 @@ export class ListaPacientesComponent implements OnInit {
 
   constructor(
     private pacienteService: PacienteService,
-    private router: Router 
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +38,7 @@ export class ListaPacientesComponent implements OnInit {
         next: (data) => {
           console.log('🟢 DATA REAL:', data);
           this.pacientes = data;
+          this.cdr.detectChanges();
         },
         error: (err) => {
           console.log('🔴 ERROR:', err);
