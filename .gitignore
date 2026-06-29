@@ -1,0 +1,52 @@
+# Entorno virtual
+venv/
+env/
+.venv/
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Base de datos SQLite
+db.sqlite3
+
+# Variables de entorno
+.env
+
+# Archivos de logs
+*.log
+
+# Archivos temporales
+*.tmp
+*.bak
+*.swp
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de cobertura
+.coverage
+htmlcov/
+
+# Archivos de pytest
+.pytest_cache/
+
+# Distribución
+build/
+dist/
+*.egg-info/
+
+# Media y archivos estáticos generados (opcional)
+media/
+staticfiles/
+
+# Node (si Angular está dentro del mismo repositorio)
+node_modules/
