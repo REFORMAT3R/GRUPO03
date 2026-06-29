@@ -1,0 +1,55 @@
+<div class="tarjeta-clinica contenedor-formulario">
+  <div class="cabecera-tabla">
+    <h3>{{ esEdicion ? 'Editar Paciente' : 'Registro de Paciente' }}</h3>
+    <a class="btn btn-eliminar" routerLink="/pacientes">Cancelar</a>
+  </div>
+
+  <form #formPac="ngForm" (ngSubmit)="formPac.valid && guardarPaciente()" class="cuerpo-formulario">
+    
+    <div class="campo-grupo">
+      <label>Nombres:</label>
+      <input type="text" [(ngModel)]="paciente.nombres" name="nombres" required #nom="ngModel">
+      <small *ngIf="nom.invalid && nom.touched" class="error-texto">El nombre es obligatorio.</small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Apellidos:</label>
+      <input type="text" [(ngModel)]="paciente.apellidos" name="apellidos" required #ape="ngModel">
+      <small *ngIf="ape.invalid && ape.touched" class="error-texto">El apellido es obligatorio.</small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>DNI (8 dígitos):</label>
+      <input type="text" [(ngModel)]="paciente.dni" name="dni" required minlength="8" maxlength="8" pattern="[0-9]*" #dniInput="ngModel">
+      <small *ngIf="dniInput.invalid && dniInput.touched" class="error-texto">Debe ingresar un DNI válido de 8 números.</small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Fecha de Nacimiento:</label>
+      <input type="date" [(ngModel)]="paciente.fecha_nacimiento" name="fecha_nacimiento" required #fecNac="ngModel">
+      <small *ngIf="fecNac.invalid && fecNac.touched" class="error-texto">La fecha de nacimiento es obligatoria.</small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Sexo:</label>
+      <select [(ngModel)]="paciente.sexo" name="sexo" required #sex="ngModel">
+        <option value="" disabled selected>Seleccione...</option>
+        <option value="M">Masculino</option>
+        <option value="F">Femenino</option>
+        <option value="O">Otro</option>
+      </select>
+      <small *ngIf="sex.invalid && sex.touched" class="error-texto">El sexo es obligatorio.</small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Teléfono (9 dígitos, empieza con 9):</label>
+      <input type="text" [(ngModel)]="paciente.telefono" name="telefono" required minlength="9" maxlength="9" pattern="9[0-9]*" #tel="ngModel">
+      <small *ngIf="tel.invalid && tel.touched" class="error-texto">Debe empezar con 9 y tener 9 dígitos.</small>
+    </div>
+
+    <button type="submit" [disabled]="formPac.invalid" class="btn btn-guardar">
+      {{ esEdicion ? 'Guardar Cambios' : 'Registrar Paciente' }}
+    </button>
+
+  </form>
+</div>
