@@ -12,6 +12,20 @@ export class CitaService {
 
   constructor(private http: HttpClient) {}
 
+  private citaEditar: Cita | null = null;
+
+  setCitaEditar(c: Cita) {
+    this.citaEditar = c;
+  }
+
+  getCitaEditar() {
+    return this.citaEditar;
+  }
+
+  limpiarCitaEditar() {
+    this.citaEditar = null;
+  }
+
   getCitas(): Observable<Cita[]> {
     return this.http.get<Cita[]>(this.apiUrl);
   }

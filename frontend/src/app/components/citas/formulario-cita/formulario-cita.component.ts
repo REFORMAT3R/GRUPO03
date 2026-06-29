@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -12,7 +12,7 @@ import { CitaService } from '../../../services/cita.service';
   templateUrl: './formulario-cita.component.html',
   styleUrl: './formulario-cita.component.css'
 })
-export class FormularioCitaComponent {
+export class FormularioCitaComponent implements OnInit {
 
   cita: any = {
     paciente: '',        
@@ -28,6 +28,20 @@ export class FormularioCitaComponent {
 
   constructor(private citaService: CitaService) {}
 
+  ngOnInit(): void {
+    const data = this.citaService.getCitaEditar();
+    if (data) {
+      this.cita = { ...data };
+      this.esEdicion = true;
+      this.idCita = data.id!;
+      
+      // Limpiamos el servicio tras cargar
+      this.citaService.limpiarCitaEditar();
+    } else {
+      this.reset();
+    }
+  }
+  
   guardarCita() {
     // Modo Edición (PUT)
     if (this.esEdicion && this.idCita) {

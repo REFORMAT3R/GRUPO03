@@ -20,14 +20,17 @@ export class PacienteService {
 
   private pacienteEdit: Paciente | null = null;
 
-setPacienteEditar(p: Paciente) {
-  this.pacienteEdit = p;
-}
+  setPacienteEditar(p: Paciente) {
+    this.pacienteEdit = p;
+  }
 
-getPacienteEditar() {
-  return this.pacienteEdit;
-}
+  getPacienteEditar() {
+    return this.pacienteEdit;
+  }
 
+  limpiarPacienteEditar() {
+      this.pacienteEdit = null;
+    }
 
   getPacientes(): Observable<Paciente[]> {
 

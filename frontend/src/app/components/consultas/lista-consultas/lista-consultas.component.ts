@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 
 import { ConsultaService } from '../../../services/consulta.service';
 
@@ -8,8 +8,8 @@ import { ConsultaService } from '../../../services/consulta.service';
   selector: 'app-lista-consultas',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './lista-consultas.html',
-  styleUrl: './lista-consultas.css'
+  templateUrl: './lista-consultas.component.html',
+  styleUrl: './lista-consultas.component.css'
 })
 export class ListaConsultasComponent implements OnInit {
 
@@ -17,11 +17,17 @@ export class ListaConsultasComponent implements OnInit {
 
   constructor(
     private consultaService: ConsultaService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.obtenerConsultas();
+  }
+
+  editarConsulta(c: any) {
+    this.consultaService.setConsultaEditar(c);
+    this.router.navigate(['/consultas/editar']);
   }
 
   obtenerConsultas(): void {

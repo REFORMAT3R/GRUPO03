@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -9,10 +9,10 @@ import { ConsultaService } from '../../../services/consulta.service';
   selector: 'app-formulario-consulta',
   standalone: true,
   imports: [FormsModule, CommonModule, RouterModule],
-  templateUrl: './formulario-consulta.html',
-  styleUrl: './formulario-consulta.css'
+  templateUrl: './formulario-consulta.component.html',
+  styleUrl: './formulario-consulta.component.css'
 })
-export class FormularioConsultaComponent {
+export class FormularioConsultaComponent implements OnInit {
 
   consulta: any = {
     cita: '',
@@ -27,6 +27,18 @@ export class FormularioConsultaComponent {
 
   constructor(private consultaService: ConsultaService) {}
 
+  ngOnInit(): void {
+    const data = this.consultaService.getConsultaEditar();
+    if (data) {
+      this.consulta = { ...data };
+      this.idConsulta = data.id;
+      this.esEdicion = true;
+      this.consultaService.limpiarConsultaEditar();
+    } else {
+      this.reset();
+    }
+  }
+  
   guardarConsulta() {
     if (this.esEdicion && this.idConsulta) {
       this.consultaService.actualizarConsulta(this.idConsulta, this.consulta)

@@ -16,15 +16,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let con of consultas">
-        <td>{{ con.id }}</td>
-        <td class="texto-negrita">Cita #{{ con.cita }}</td>
-        <td>{{ con.diagnostico }}</td>
-        <td>{{ con.tratamiento }}</td>
-        <td>{{ con.medicamentos }}</td>
+      <tr *ngFor="let c of consultas">
+        <td>{{ c.id }}</td>
+        <td class="texto-negrita">Cita #{{ c.cita }}</td>
+        <td>{{ c.diagnostico }}</td>
+        <td>{{ c.tratamiento }}</td>
+        <td>{{ c.medicamentos }}</td>
         <td>
-          <button class="btn btn-editar" [routerLink]="['/consultas/editar']">Editar</button>
-          <button class="btn btn-eliminar" (click)="eliminarConsulta(con.id)">Eliminar</button>
+          <button class="btn btn-editar" (click)="editarConsulta(c)">Editar</button>
+          <button class="btn btn-eliminar" (click)="eliminarConsulta(c.id)">Eliminar</button>
         </td>
       </tr>
       <tr *ngIf="consultas.length === 0">

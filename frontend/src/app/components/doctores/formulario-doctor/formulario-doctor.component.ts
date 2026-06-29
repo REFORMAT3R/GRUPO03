@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { DoctorService } from '../../../services/doctor.service';
   templateUrl: './formulario-doctor.component.html',
   styleUrl: './formulario-doctor.component.css'
 })
-export class FormularioDoctorComponent{
+export class FormularioDoctorComponent implements OnInit {
 
   doctor: any = {
     nombres: '',
@@ -26,6 +26,18 @@ export class FormularioDoctorComponent{
   idDoctor: number | null = null;
 
   constructor(private doctorService: DoctorService) {}
+
+  ngOnInit(): void {
+    const data = this.doctorService.getDoctorEditar();
+    if (data) {
+      this.doctor = { ...data };
+      this.idDoctor = data.id;
+      this.esEdicion = true;
+      this.doctorService.limpiarDoctorEditar(); // Limpiamos tras cargar
+    } else {
+      this.reset();
+    }
+  }
 
   guardarDoctor() {
     if (this.esEdicion && this.idDoctor) {

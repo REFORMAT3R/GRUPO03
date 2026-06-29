@@ -9,8 +9,8 @@ import { FormularioCitaComponent } from './components/citas/formulario-cita/form
 import { ListaDoctoresComponent } from './components/doctores/lista-doctores/lista-doctores.component';
 import { FormularioDoctorComponent } from './components/doctores/formulario-doctor/formulario-doctor.component';
 
-import { ListaConsultasComponent } from './components/consultas/lista-consultas/lista-consultas';
-import { FormularioConsultaComponent } from './components/consultas/formulario-consulta/formulario-consulta';
+import { ListaConsultasComponent } from './components/consultas/lista-consultas/lista-consultas.component';
+import { FormularioConsultaComponent } from './components/consultas/formulario-consulta/formulario-consulta.component';
 
 export const routes: Routes = [
   {

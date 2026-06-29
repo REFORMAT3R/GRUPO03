@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 
 import { DoctorService } from '../../../services/doctor.service';
+import { Doctor } from '../../../models/doctor';
 
 @Component({
   selector: 'app-lista-doctores',
@@ -17,11 +18,17 @@ export class ListaDoctoresComponent implements OnInit {
 
   constructor(
     private doctorService: DoctorService,
-    private crd: ChangeDetectorRef
+    private crd: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.obtenerDoctores();
+  }
+
+  editarDoctor(d: any) {
+    this.doctorService.setDoctorEditar(d);
+    this.router.navigate(['/doctores/editar']);
   }
 
   obtenerDoctores(): void {

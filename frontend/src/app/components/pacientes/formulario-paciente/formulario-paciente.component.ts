@@ -14,13 +14,12 @@ import { PacienteService } from '../../../services/paciente.service';
 })
 export class FormularioPacienteComponent implements OnInit {
 
-  // Objeto estructurado exactamente igual al models.py de Django
   paciente: any = {
     dni: '',
     nombres: '',
     apellidos: '',
-    fecha_nacimiento: '', // Formato requerido por Django: 'YYYY-MM-DD'
-    sexo: '',              // Valores requeridos: 'M', 'F' u 'O'
+    fecha_nacimiento: '', 
+    sexo: '',             
     telefono: ''
   };
 
@@ -30,12 +29,18 @@ export class FormularioPacienteComponent implements OnInit {
 
   constructor(private pacienteService: PacienteService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const data = this.pacienteService.getPacienteEditar();
     if (data) {
-      this.paciente = data;
+      this.paciente = { ...data};
       this.esEdicion = true;
       this.idPaciente = data.id!;
+
+      // Limpiamos el servicio después de cargar
+      this.pacienteService.limpiarPacienteEditar();
+    } else {
+      // En caso no haya nada, aseguramos que el formulario esté limpio
+      this.reset();
     }
   }
 

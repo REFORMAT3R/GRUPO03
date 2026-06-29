@@ -11,6 +11,20 @@ export class ConsultaService {
 
   constructor(private http: HttpClient) { }
 
+  private consultaEditar: any = null;
+
+  setConsultaEditar(c: any) { 
+    this.consultaEditar = c; 
+  }
+
+  getConsultaEditar() { 
+    return this.consultaEditar; 
+  }
+
+  limpiarConsultaEditar() { 
+    this.consultaEditar = null; 
+  }
+  
   getConsultas(): Observable<any> {
     return this.http.get(this.apiUrl);
   }

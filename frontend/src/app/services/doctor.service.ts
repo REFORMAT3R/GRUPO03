@@ -11,6 +11,20 @@ export class DoctorService {
 
   constructor(private http: HttpClient) { }
 
+  private doctorEditar: any = null;
+
+  setDoctorEditar(d: any) {
+    this.doctorEditar = d;
+  }
+
+  getDoctorEditar() {
+    return this.doctorEditar;
+  }
+
+  limpiarDoctorEditar() {
+    this.doctorEditar = null;
+  }
+
   // GET: Obtener todos los doctores
   getDoctores(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);

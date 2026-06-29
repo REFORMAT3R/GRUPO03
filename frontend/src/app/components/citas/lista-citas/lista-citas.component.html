@@ -9,7 +9,8 @@
       <tr>
         <th>ID</th>
         <th>Paciente (ID)</th>
-        <th>Fecha y Hora</th>
+        <th>Fecha</th>
+        <th>Hora</th>
         <th>Motivo / Especialidad</th>
         <th>Acciones</th>
       </tr>
@@ -19,6 +20,7 @@
         <td>{{ c.id }}</td>
         <td class="texto-negrita">{{ c.paciente }}</td>
         <td>{{ c.fecha }}</td>
+        <td>{{ c.hora }}</td>
         <td>{{ c.motivo || 'Consulta General' }}</td>
         <td>
           <button class="btn btn-editar" (click)="editarCita(c)">Editar</button>
