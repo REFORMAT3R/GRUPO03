@@ -8,14 +8,18 @@
     
     <div class="campo-grupo">
       <label>Nombres:</label>
-      <input type="text" [(ngModel)]="doctor.nombres" name="nombres" required #nom="ngModel">
-      <small *ngIf="nom.invalid && nom.touched" class="error-texto">El nombre es obligatorio.</small>
+      <input type="text" [(ngModel)]="doctor.nombres" name="nombres" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*" #nom="ngModel">
+      <small *ngIf="nom.invalid && nom.touched" class="error-texto">
+        {{ nom.errors?.['required'] ? 'El nombre es obligatorio.' : 'Solo se permiten letras.' }}
+      </small>
     </div>
 
     <div class="campo-grupo">
       <label>Apellidos:</label>
-      <input type="text" [(ngModel)]="doctor.apellidos" name="apellidos" required #ape="ngModel">
-      <small *ngIf="ape.invalid && ape.touched" class="error-texto">El apellido es obligatorio.</small>
+      <input type="text" [(ngModel)]="doctor.apellidos" name="apellidos" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*" #ape="ngModel">
+      <small *ngIf="ape.invalid && ape.touched" class="error-texto">
+        {{ ape.errors?.['required'] ? 'El apellido es obligatorio.' : 'Solo se permiten letras.' }}
+      </small>
     </div>
 
     <div class="campo-grupo">
