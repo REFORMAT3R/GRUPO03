@@ -20,8 +20,10 @@
 
     <div class="campo-grupo">
       <label>Fecha de la Cita:</label>
-      <input type="date" [(ngModel)]="cita.fecha" name="fecha" required #fec="ngModel">
-      <small *ngIf="fec.invalid && fec.touched" class="error-texto">La fecha de la cita es obligatoria.</small>
+      <input type="date" [(ngModel)]="cita.fecha" name="fecha" required [min]="fechaMinima" #fec="ngModel">
+      <small *ngIf="fec.invalid && fec.touched" class="error-texto">
+        {{ fec.errors?.['required'] ? 'La fecha es obligatoria.' : 'No se permiten fechas pasadas.' }}
+      </small>
     </div>
 
     <div class="campo-grupo">

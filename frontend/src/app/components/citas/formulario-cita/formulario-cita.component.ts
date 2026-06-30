@@ -25,10 +25,14 @@ export class FormularioCitaComponent implements OnInit {
 
   esEdicion: boolean = false;
   idCita: number | null = null;
+  fechaMinima: string = '';
 
   constructor(private citaService: CitaService) {}
 
   ngOnInit(): void {
+    const hoy = new Date();
+    this.fechaMinima = hoy.toISOString().split('T')[0];
+
     const data = this.citaService.getCitaEditar();
     if (data) {
       this.cita = { ...data };

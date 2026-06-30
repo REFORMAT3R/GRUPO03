@@ -8,20 +8,26 @@
     
     <div class="campo-grupo">
       <label>Nombres:</label>
-      <input type="text" [(ngModel)]="paciente.nombres" name="nombres" required #nom="ngModel">
-      <small *ngIf="nom.invalid && nom.touched" class="error-texto">El nombre es obligatorio.</small>
+      <input type="text" [(ngModel)]="paciente.nombres" name="nombres" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*" #nom="ngModel">
+      <small *ngIf="nom.invalid && nom.touched" class="error-texto">
+        {{ nom.errors?.['required'] ? 'El nombre es obligatorio.' : 'El nombre no puede contener números.' }}
+      </small>
     </div>
 
     <div class="campo-grupo">
       <label>Apellidos:</label>
-      <input type="text" [(ngModel)]="paciente.apellidos" name="apellidos" required #ape="ngModel">
-      <small *ngIf="ape.invalid && ape.touched" class="error-texto">El apellido es obligatorio.</small>
+      <input type="text" [(ngModel)]="paciente.apellidos" name="apellidos" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*" #ape="ngModel">
+      <small *ngIf="ape.invalid && ape.touched" class="error-texto">
+        {{ ape.errors?.['required'] ? 'El apellido es obligatorio.' : 'El apellido no puede contener números.' }}
+      </small>
     </div>
 
     <div class="campo-grupo">
       <label>DNI (8 dígitos):</label>
       <input type="text" [(ngModel)]="paciente.dni" name="dni" required minlength="8" maxlength="8" pattern="[0-9]*" #dniInput="ngModel">
-      <small *ngIf="dniInput.invalid && dniInput.touched" class="error-texto">Debe ingresar un DNI válido de 8 números.</small>
+      <small *ngIf="dniInput.invalid && dniInput.touched" class="error-texto">
+        {{ dniInput.errors?.['required'] ? 'El DNI es obligatorio.' : 'El DNI debe tener 8 dígitos numéricos.' }}
+      </small>
     </div>
 
     <div class="campo-grupo">
@@ -44,7 +50,9 @@
     <div class="campo-grupo">
       <label>Teléfono (9 dígitos, empieza con 9):</label>
       <input type="text" [(ngModel)]="paciente.telefono" name="telefono" required minlength="9" maxlength="9" pattern="9[0-9]*" #tel="ngModel">
-      <small *ngIf="tel.invalid && tel.touched" class="error-texto">Debe empezar con 9 y tener 9 dígitos.</small>
+      <small *ngIf="tel.invalid && tel.touched" class="error-texto">
+        {{ tel.errors?.['required'] ? 'El teléfono es obligatorio.' : 'Debe empezar con 9 y tener 9 dígitos.' }}
+      </small>
     </div>
 
     <button type="submit" [disabled]="formPac.invalid" class="btn btn-guardar">
