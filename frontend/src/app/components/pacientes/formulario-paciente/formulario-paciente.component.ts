@@ -26,10 +26,15 @@ export class FormularioPacienteComponent implements OnInit {
   // Control de edición
   esEdicion: boolean = false;
   idPaciente: number | null = null;
+  fechaMaxima: string = '';
 
   constructor(private pacienteService: PacienteService) {}
 
   ngOnInit(): void {
+
+    const hoy = new Date();
+    this.fechaMaxima = hoy.toISOString().split('T')[0];
+    
     const data = this.pacienteService.getPacienteEditar();
     if (data) {
       this.paciente = { ...data};

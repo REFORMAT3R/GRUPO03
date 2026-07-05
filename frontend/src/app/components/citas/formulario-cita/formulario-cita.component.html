@@ -7,20 +7,59 @@
   <form #formCita="ngForm" class="cuerpo-formulario">
     
     <div class="campo-grupo">
-      <label>ID del Paciente:</label>
-      <input type="number" [(ngModel)]="cita.paciente" name="paciente" required min="1" #pac="ngModel">
-      <small *ngIf="pac.invalid && pac.touched" class="error-texto">Debe ingresar un ID numérico de paciente válido.</small>
+      <label>Paciente:</label>
+
+      <select
+        [(ngModel)]="cita.paciente"
+        name="paciente"
+        required
+        #pac="ngModel">
+
+        <option value="" disabled selected>Seleccione paciente</option>
+
+        <option *ngFor="let p of pacientes" [value]="p.id">
+          {{ p.nombres }} {{ p.apellidos }}
+        </option>
+
+      </select>
+
+      <small *ngIf="pac.invalid && pac.touched" class="error-texto">
+        Debe seleccionar un paciente.
+      </small>
     </div>
 
     <div class="campo-grupo">
-      <label>ID del Doctor:</label>
-      <input type="number" [(ngModel)]="cita.doctor" name="doctor" required min="1" #doc="ngModel">
-      <small *ngIf="doc.invalid && doc.touched" class="error-texto">Debe ingresar un ID numérico de doctor válido.</small>
+      <label>Doctor:</label>
+
+      <select
+        [(ngModel)]="cita.doctor"
+        name="doctor"
+        required
+        #doc="ngModel">
+
+        <option value="" disabled selected>Seleccione doctor</option>
+
+        <option *ngFor="let d of doctores" [value]="d.id">
+          Dr. {{ d.nombres }} {{ d.apellidos }}
+        </option>
+
+      </select>
+
+      <small *ngIf="doc.invalid && doc.touched" class="error-texto">
+        Debe seleccionar un doctor.
+      </small>
     </div>
 
     <div class="campo-grupo">
       <label>Fecha de la Cita:</label>
-      <input type="date" [(ngModel)]="cita.fecha" name="fecha" required [min]="fechaMinima" #fec="ngModel">
+      <input
+        type="date"
+        [(ngModel)]="cita.fecha"
+        name="fecha"
+        required
+        [min]="fechaMinima"
+        (change)="onFechaChange()"
+        #fec="ngModel">
       <small *ngIf="fec.invalid && fec.touched" class="error-texto">
         {{ fec.errors?.['required'] ? 'La fecha es obligatoria.' : 'No se permiten fechas pasadas.' }}
       </small>
@@ -28,7 +67,14 @@
 
     <div class="campo-grupo">
       <label>Hora de la Cita:</label>
-      <input type="time" [(ngModel)]="cita.hora" name="hora" required #hor="ngModel">
+      <input
+        type="time"
+        [(ngModel)]="cita.hora"
+        name="hora"
+        required
+        [min]="horaMinima"
+        max="18:00"
+        #hor="ngModel">
       <small *ngIf="hor.invalid && hor.touched" class="error-texto">La hora de la cita es obligatoria.</small>
     </div>
 

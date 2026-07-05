@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cita } from '../models/cita';
+import { Paciente } from '../models/paciente';
+import { Doctor } from '../models/doctor';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +30,14 @@ export class CitaService {
 
   getCitas(): Observable<Cita[]> {
     return this.http.get<Cita[]>(this.apiUrl);
+  }
+
+  getPacientes(): Observable<Paciente[]> {
+    return this.http.get<Paciente[]>('http://localhost:8000/api/pacientes/');
+  }
+
+  getDoctores(): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>('http://localhost:8000/api/doctores/');
   }
 
   crearCita(cita: Cita): Observable<Cita> {

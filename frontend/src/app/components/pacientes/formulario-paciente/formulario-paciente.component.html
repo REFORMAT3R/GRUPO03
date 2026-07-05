@@ -32,8 +32,24 @@
 
     <div class="campo-grupo">
       <label>Fecha de Nacimiento:</label>
-      <input type="date" [(ngModel)]="paciente.fecha_nacimiento" name="fecha_nacimiento" required #fecNac="ngModel">
-      <small *ngIf="fecNac.invalid && fecNac.touched" class="error-texto">La fecha de nacimiento es obligatoria.</small>
+
+      <input
+        type="date"
+        [(ngModel)]="paciente.fecha_nacimiento"
+        name="fecha_nacimiento"
+        required
+        [max]="fechaMaxima"
+        #fecNac="ngModel">
+
+      <small *ngIf="fecNac.invalid && fecNac.touched" class="error-texto">
+        <span *ngIf="fecNac.errors?.['required']">
+          La fecha de nacimiento es obligatoria.
+        </span>
+
+        <span *ngIf="fecNac.errors?.['max']">
+          La fecha no puede ser mayor a hoy.
+        </span>
+      </small>
     </div>
 
     <div class="campo-grupo">
