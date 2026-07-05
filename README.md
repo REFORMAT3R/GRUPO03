@@ -7,7 +7,7 @@ Docente: **Carlo José Luis Corrales Delgado**
 
 Sistema web para la gestión integral de una clínica, que permite administrar pacientes, 
 doctores, consultas, citas médicas y exámenes clínicos, con control de acceso diferenciado
-según el rol del usuario (Administrativo, Doctor, Paciente).
+según el rol del usuario (Administrativo, Recepcionista, Doctor).
 
 ## Integrantes del grupo
 
