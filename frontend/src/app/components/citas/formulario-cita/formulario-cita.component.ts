@@ -15,39 +15,71 @@ import { CitaService } from '../../../services/cita.service';
 export class FormularioCitaComponent implements OnInit {
 
   cita: any = {
-    paciente: '',        
-    doctor: '',        
-    fecha: '',       
-    hora: '',        
+    paciente: '',
+    doctor: '',
+    fecha: '',
+    hora: '',
     motivo: '',
-    estado: 'PENDIENTE' 
+    estado: 'PENDIENTE'
   };
 
   esEdicion: boolean = false;
   idCita: number | null = null;
+
   fechaMinima: string = '';
+  fechaHoy: string = '';
+  horaMinima: string = '08:00';
+
+  pacientes: any[] = [];
+  doctores: any[] = [];
 
   constructor(private citaService: CitaService) {}
 
+  cargarPacientes() {
+    this.citaService.getPacientes().subscribe(data => {
+      this.pacientes = data;
+    });
+  }
+
+  cargarDoctores() {
+    this.citaService.getDoctores().subscribe(data => {
+      this.doctores = data;
+    });
+  }
+
   ngOnInit(): void {
-    const hoy = new Date();
-    this.fechaMinima = hoy.toISOString().split('T')[0];
+
+    // cargar datos
+    this.cargarPacientes();
+    this.cargarDoctores();
+
+    const ahora = new Date();
+
+    this.fechaMinima = ahora.toISOString().split('T')[0];
+    this.fechaHoy = this.fechaMinima;
 
     const data = this.citaService.getCitaEditar();
+
     if (data) {
       this.cita = { ...data };
       this.esEdicion = true;
       this.idCita = data.id!;
-      
-      // Limpiamos el servicio tras cargar
       this.citaService.limpiarCitaEditar();
-    } else {
-      this.reset();
     }
   }
-  
+
+  onFechaChange() {
+    const ahora = new Date();
+    const hoy = ahora.toISOString().split('T')[0];
+
+    if (this.cita.fecha === hoy) {
+      this.horaMinima = ahora.toTimeString().slice(0, 5);
+    } else {
+      this.horaMinima = '08:00';
+    }
+  }
+
   guardarCita() {
-    // Modo Edición (PUT)
     if (this.esEdicion && this.idCita) {
       this.citaService.actualizarCita(this.idCita, this.cita)
         .subscribe({
@@ -55,22 +87,16 @@ export class FormularioCitaComponent implements OnInit {
             alert('Cita actualizada');
             this.reset();
           },
-          error: (err) => {
-            console.error(err);
-          }
+          error: (err) => console.error(err)
         });
-    } 
-    // Modo Creación (POST)
-    else {
+    } else {
       this.citaService.crearCita(this.cita)
         .subscribe({
           next: () => {
             alert('Cita creada');
             this.reset();
           },
-          error: (err) => {
-            console.error(err);
-          }
+          error: (err) => console.error(err)
         });
     }
   }
@@ -84,7 +110,9 @@ export class FormularioCitaComponent implements OnInit {
       motivo: '',
       estado: 'PENDIENTE'
     };
+
     this.esEdicion = false;
     this.idCita = null;
+    this.horaMinima = '08:00';
   }
 }
