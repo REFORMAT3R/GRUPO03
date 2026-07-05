@@ -32,6 +32,7 @@ según el rol del usuario (Administrativo, Recepcionista, Doctor).
 - TypeScript
 
 ##  Estructura del proyecto
+```
 backend/
 ├── clinica/
 │   ├── migrations/
@@ -50,3 +51,4 @@ frontend/
 ├── src/
 ├── node_modules/
 └── package.json
+```
