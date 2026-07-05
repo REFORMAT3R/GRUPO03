@@ -9,7 +9,7 @@ Sistema web para la gestión integral de una clínica, que permite administrar p
 doctores, consultas, citas médicas y exámenes clínicos, con control de acceso diferenciado
 según el rol del usuario (Administrativo, Doctor, Paciente).
 
-## 👥 Integrantes del grupo
+## Integrantes del grupo
 
 | Nombres | Rol | Aporte |
 |---|---|---|
