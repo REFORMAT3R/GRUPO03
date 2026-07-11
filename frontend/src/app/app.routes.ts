@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 
+import { LoginComponent } from './components/login/login.component';
+
 import { ListaPacientesComponent } from './components/pacientes/lista-pacientes/lista-pacientes.component';
 import { FormularioPacienteComponent } from './components/pacientes/formulario-paciente/formulario-paciente.component';
 
@@ -15,8 +17,12 @@ import { FormularioConsultaComponent } from './components/consultas/formulario-c
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'pacientes',
+    redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'pacientes',

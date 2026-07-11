@@ -1,6 +1,6 @@
-<nav class="menu-clinica">
+<nav class="menu-clinica" *ngIf="mostrarMenu">
   <div class="contenedor-menu">
-    <a routerLink="/" class="logo">Clínica Moisés Heresi</a>
+    <a routerLink="/" class="logo">{{ title }}</a>
     <div class="enlaces">
       <a routerLink="/pacientes" routerLinkActive="activo">Pacientes</a>
       <a routerLink="/citas" routerLinkActive="activo">Citas Médicas</a>
