@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { PacienteService } from '../../../services/paciente.service';
+import { PacienteService } from '../../../../services/paciente.service';
 
 @Component({
   selector: 'app-formulario-paciente',

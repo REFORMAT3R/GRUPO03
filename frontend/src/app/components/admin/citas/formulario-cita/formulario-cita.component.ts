@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { CitaService } from '../../../services/cita.service';
+import { CitaService } from '../../../../services/cita.service';
 
 @Component({
   selector: 'app-formulario-cita',

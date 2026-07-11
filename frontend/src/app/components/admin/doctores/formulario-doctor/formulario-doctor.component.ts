@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
-import { DoctorService } from '../../../services/doctor.service'; 
+import { DoctorService } from '../../../../services/doctor.service'; 
 
 @Component({
   selector: 'app-formulario-doctor',

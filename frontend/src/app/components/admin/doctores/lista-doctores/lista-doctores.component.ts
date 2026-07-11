@@ -2,8 +2,8 @@ import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
-import { DoctorService } from '../../../services/doctor.service';
-import { Doctor } from '../../../models/doctor';
+import { DoctorService } from '../../../../services/doctor.service';
+import { Doctor } from '../../../../models/doctor';
 
 @Component({
   selector: 'app-lista-doctores',

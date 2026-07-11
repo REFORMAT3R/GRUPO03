@@ -1,18 +1,18 @@
 import { Routes } from '@angular/router';
 
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/home/login/login.component';
 
-import { ListaPacientesComponent } from './components/pacientes/lista-pacientes/lista-pacientes.component';
-import { FormularioPacienteComponent } from './components/pacientes/formulario-paciente/formulario-paciente.component';
+import { ListaPacientesComponent } from './components/admin/pacientes/lista-pacientes/lista-pacientes.component';
+import { FormularioPacienteComponent } from './components/admin/pacientes/formulario-paciente/formulario-paciente.component';
 
-import { ListaCitasComponent } from './components/citas/lista-citas/lista-citas.component';
-import { FormularioCitaComponent } from './components/citas/formulario-cita/formulario-cita.component';
+import { ListaCitasComponent } from './components/admin/citas/lista-citas/lista-citas.component';
+import { FormularioCitaComponent } from './components/admin/citas/formulario-cita/formulario-cita.component';
 
-import { ListaDoctoresComponent } from './components/doctores/lista-doctores/lista-doctores.component';
-import { FormularioDoctorComponent } from './components/doctores/formulario-doctor/formulario-doctor.component';
+import { ListaDoctoresComponent } from './components/admin/doctores/lista-doctores/lista-doctores.component';
+import { FormularioDoctorComponent } from './components/admin/doctores/formulario-doctor/formulario-doctor.component';
 
-import { ListaConsultasComponent } from './components/consultas/lista-consultas/lista-consultas.component';
-import { FormularioConsultaComponent } from './components/consultas/formulario-consulta/formulario-consulta.component';
+import { ListaConsultasComponent } from './components/admin/consultas/lista-consultas/lista-consultas.component';
+import { FormularioConsultaComponent } from './components/admin/consultas/formulario-consulta/formulario-consulta.component';
 
 export const routes: Routes = [
   {

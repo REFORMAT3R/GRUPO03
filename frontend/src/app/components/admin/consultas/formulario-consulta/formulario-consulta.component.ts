@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { ConsultaService } from '../../../services/consulta.service';
+import { ConsultaService } from '../../../../services/consulta.service';
 
 @Component({
   selector: 'app-formulario-consulta',

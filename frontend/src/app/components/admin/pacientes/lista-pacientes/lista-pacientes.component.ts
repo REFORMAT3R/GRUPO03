@@ -2,8 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 
-import { PacienteService } from '../../../services/paciente.service';
-import { Paciente } from '../../../models/paciente';
+import { PacienteService } from '../../../../services/paciente.service';
+import { Paciente } from '../../../../models/paciente';
 
 @Component({
   selector: 'app-lista-pacientes',

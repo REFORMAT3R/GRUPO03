@@ -2,8 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 
-import { CitaService } from '../../../services/cita.service';
-import { Cita } from '../../../models/cita';
+import { CitaService } from '../../../../services/cita.service';
+import { Cita } from '../../../../models/cita';
 
 @Component({
   selector: 'app-lista-citas',

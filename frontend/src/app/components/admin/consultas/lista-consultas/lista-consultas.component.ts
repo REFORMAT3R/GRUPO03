@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
-import { ConsultaService } from '../../../services/consulta.service';
+import { ConsultaService } from '../../../../services/consulta.service';
 
 @Component({
   selector: 'app-lista-consultas',
