@@ -1,0 +1,94 @@
+<div class="tarjeta-clinica">
+
+  <div class="cabecera-tabla cabecera-azul">
+
+    <h3>Personal Administrativo</h3>
+
+    <a
+      class="btn btn-nuevo"
+      routerLink="/admin/personal/nuevo">
+
+      + Registrar Personal
+
+    </a>
+
+  </div>
+
+
+  <table class="tabla-datos">
+
+    <thead>
+
+      <tr>
+
+        <th>ID</th>
+        <th>Nombre Completo</th>
+        <th>Rol</th>
+        <th>Usuario</th>
+        <th>Correo Electrónico</th>
+        <th>Teléfono</th>
+        <th>Acciones</th>
+
+      </tr>
+
+    </thead>
+
+
+    <tbody>
+
+      <tr *ngFor="let p of personal">
+
+        <td>{{ p.id }}</td>
+
+        <td class="texto-negrita">
+          {{ p.nombres }} {{ p.apellidos }}
+        </td>
+
+        <td>{{ p.rol }}</td>
+
+        <td>{{ p.username }}</td>
+
+        <td>{{ p.email }}</td>
+
+        <td>{{ p.telefono }}</td>
+
+        <td>
+
+          <button
+            class="btn btn-editar"
+            (click)="editarPersonal(p)">
+
+            Editar
+
+          </button>
+
+          <button
+            class="btn btn-eliminar"
+            (click)="eliminarPersonal(p.id!)">
+
+            Eliminar
+
+          </button>
+
+        </td>
+
+      </tr>
+
+
+      <tr *ngIf="personal.length === 0">
+
+        <td
+          colspan="7"
+          class="tabla-vacia">
+
+          No hay personal registrado en el sistema.
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>

@@ -120,19 +120,15 @@ class PersonalRegistroSerializer(serializers.Serializer):
 class PersonalSerializer(serializers.ModelSerializer):
 
     username = serializers.CharField(
-        source='usuario.username',
-        read_only=True
+        source='usuario.username'
     )
 
     email = serializers.EmailField(
-        source='usuario.email',
-        read_only=True
+        source='usuario.email'
     )
-
 
     class Meta:
         model = Personal
-
         fields = [
             'id',
             'username',
@@ -142,6 +138,48 @@ class PersonalSerializer(serializers.ModelSerializer):
             'rol',
             'telefono'
         ]
+
+    def update(self, instance, validated_data):
+
+        usuario_data = validated_data.pop('usuario', {})
+
+        instance.nombres = validated_data.get(
+            'nombres',
+            instance.nombres
+        )
+
+        instance.apellidos = validated_data.get(
+            'apellidos',
+            instance.apellidos
+        )
+
+        instance.rol = validated_data.get(
+            'rol',
+            instance.rol
+        )
+
+        instance.telefono = validated_data.get(
+            'telefono',
+            instance.telefono
+        )
+
+        instance.save()
+
+        usuario = instance.usuario
+
+        usuario.username = usuario_data.get(
+            'username',
+            usuario.username
+        )
+
+        usuario.email = usuario_data.get(
+            'email',
+            usuario.email
+        )
+
+        usuario.save()
+
+        return instance
 
 
 

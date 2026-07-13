@@ -1,49 +1,63 @@
 <div class="login-container">
 
-  <h2>Iniciar Sesión</h2>
+  <div class="login-card">
 
+    <div class="login-header">
 
-  <form (ngSubmit)="iniciarSesion()">
+      <h2>Iniciar Sesión</h2>
 
+      <p>Ingrese sus credenciales para acceder al sistema.</p>
 
-    <label>
-      Usuario
-    </label>
+    </div>
 
-    <input
-      type="text"
-      [(ngModel)]="username"
-      name="username"
-      required
-    >
+    <form
+      class="login-form"
+      (ngSubmit)="iniciarSesion()">
 
+      <div class="campo">
 
+        <label>Usuario</label>
 
-    <label>
-      Contraseña
-    </label>
+        <input
+          type="text"
+          [(ngModel)]="username"
+          name="username"
+          placeholder="Ingrese su usuario"
+          required>
 
+      </div>
 
-    <input
-      type="password"
-      [(ngModel)]="password"
-      name="password"
-      required
-    >
+      <div class="campo">
 
+        <label>Contraseña</label>
 
+        <input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Ingrese su contraseña"
+          required>
 
-    <button type="submit">
-      Ingresar
-    </button>
+      </div>
 
+      <button
+        class="btn-login"
+        type="submit">
 
-    <p *ngIf="error">
-      {{error}}
-    </p>
+        Ingresar
 
+      </button>
 
-  </form>
+      <p
+        class="mensaje-error"
+        *ngIf="error">
 
+        {{ error }}
+
+      </p>
+
+    </form>
+
+  </div>
 
 </div>

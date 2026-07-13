@@ -1,0 +1,19 @@
+/* Color Azul para Personal */
+.cabecera-azul {
+  background-color: #5a1b84 !important;
+}
+
+.cabecera-azul .btn-nuevo {
+  color: #2980b9 !important;
+  background-color: #ffffff;
+}
+
+.texto-negrita {
+  font-weight: bold;
+}
+
+.tabla-vacia {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+}

@@ -1,60 +1,154 @@
+* {
+  box-sizing: border-box;
+}
+
 .login-container {
+
+  min-height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
-  background-color: #f4f7f6;
+
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+
+  padding: 20px;
+
 }
 
-.tarjeta-clinica {
+.login-card {
+
   width: 100%;
-  max-width: 400px;
-  padding: 2rem;
+  max-width: 420px;
+
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+
+  border-radius: 10px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,.2);
+
+  padding: 35px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+}
+
+.login-header {
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
   text-align: center;
+
 }
 
-.campo-grupo {
-  margin-bottom: 1.5rem;
-  text-align: left;
+.login-header h2 {
+
+  margin: 0;
+
+  color: #1e3c72;
+
+  font-size: 30px;
+
 }
 
-.campo-grupo label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+.login-header p {
+
+  margin: 0;
+
+  color: #666;
+
+  font-size: 14px;
+
 }
 
-.campo-grupo input {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.login-form {
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
 }
 
-.btn-guardar {
-  width: 100%;
-  padding: 1rem;
-  background-color: #007bff;
-  color: white;
+.campo {
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+}
+
+.campo label {
+
+  font-weight: 600;
+
+  color: #444;
+
+}
+
+.campo input {
+
+  padding: 12px;
+
+  border: 1px solid #d0d0d0;
+
+  border-radius: 6px;
+
+  font-size: 15px;
+
+  transition: .2s;
+
+}
+
+.campo input:focus {
+
+  outline: none;
+
+  border-color: #2a5298;
+
+  box-shadow: 0 0 6px rgba(42,82,152,.25);
+
+}
+
+.btn-login {
+
+  padding: 13px;
+
   border: none;
-  border-radius: 4px;
+
+  border-radius: 6px;
+
+  background: #2a5298;
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
   cursor: pointer;
-  font-size: 1rem;
+
+  transition: .2s;
+
 }
 
-.btn-guardar:disabled {
-  background-color: #ccc;
+.btn-login:hover {
+
+  background: #1e3c72;
+
 }
 
 .mensaje-error {
-  color: #c0392b;
-  background-color: #fdecea;
-  border: 1px solid #f5c6cb;
-  border-radius: 4px;
-  padding: 0.6rem;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
+
+  text-align: center;
+
+  color: #d63031;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
 }

@@ -18,6 +18,9 @@ import { FormularioDoctorComponent } from './components/admin/doctores/formulari
 import { ListaConsultasComponent } from './components/admin/consultas/lista-consultas/lista-consultas.component';
 import { FormularioConsultaComponent } from './components/admin/consultas/formulario-consulta/formulario-consulta.component';
 
+import { ListaPersonalComponent } from './components/admin/personal/lista-personal/lista-personal.component';
+import { FormularioPersonalComponent } from './components/admin/personal/formulario-personal/formulario-personal.component';
+
 import { authGuard } from './core/auth.guard';
 import { rolGuard } from './core/rol.guard';
 
@@ -117,6 +120,21 @@ children: [
     {
       path:'consultas/editar',
       component:FormularioConsultaComponent
+    },
+
+    {
+      path: 'personal',
+      component: ListaPersonalComponent
+    },
+
+    {
+      path: 'personal/nuevo',
+      component: FormularioPersonalComponent
+    },
+
+    {
+      path: 'personal/editar',
+      component: FormularioPersonalComponent
     },
 
     {

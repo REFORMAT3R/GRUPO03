@@ -1,6 +1,7 @@
 export interface Personal {
   id?: number;
-  usuario: number;
+  username: string;
+  email: string;
   nombres: string;
   apellidos: string;
   rol: 'ADMIN' | 'RECEPCION';

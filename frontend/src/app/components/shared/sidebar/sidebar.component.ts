@@ -20,9 +20,10 @@ export class SidebarComponent {
  
   private enlacesPorRol: Record<string, EnlaceMenu[]> = {
     ADMIN: [
-      { ruta: '/admin', etiqueta: 'Inicio'},
+      { ruta: '/admin', etiqueta: 'Mi Panel'},
       { ruta: '/admin/pacientes', etiqueta: 'Pacientes' },
       { ruta: '/admin/citas', etiqueta: 'Citas' },
+      { ruta: '/admin/personal', etiqueta: 'Personal' },
       { ruta: '/admin/doctores', etiqueta: 'Doctores' },
       { ruta: '/admin/consultas', etiqueta: 'Consultas' }
     ],
