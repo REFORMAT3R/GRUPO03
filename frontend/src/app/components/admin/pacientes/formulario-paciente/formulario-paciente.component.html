@@ -1,7 +1,7 @@
 <div class="tarjeta-clinica contenedor-formulario">
   <div class="cabecera-tabla">
     <h3>{{ esEdicion ? 'Editar Paciente' : 'Registro de Paciente' }}</h3>
-    <a class="btn btn-eliminar" routerLink="/pacientes">Cancelar</a>
+    <a class="btn btn-eliminar" routerLink="/admin/pacientes">Cancelar</a>
   </div>
 
   <form #formPac="ngForm" (ngSubmit)="formPac.valid && guardarPaciente()" class="cuerpo-formulario">

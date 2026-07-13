@@ -28,7 +28,7 @@ export class ListaDoctoresComponent implements OnInit {
 
   editarDoctor(d: any) {
     this.doctorService.setDoctorEditar(d);
-    this.router.navigate(['/doctores/editar']);
+    this.router.navigate(['/admin/doctores/editar']);
   }
 
   obtenerDoctores(): void {

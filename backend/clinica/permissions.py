@@ -13,22 +13,6 @@ class EsAdmin(permissions.BasePermission):
             request.user.personal_perfil.rol == 'ADMIN'
         )
 
-
-
-class EsRecepcion(permissions.BasePermission):
-    """
-    Solo usuarios de Recepción
-    """
-
-    def has_permission(self, request, view):
-        return (
-            request.user.is_authenticated and
-            hasattr(request.user, 'personal_perfil') and
-            request.user.personal_perfil.rol == 'RECEPCION'
-        )
-
-
-
 class EsAdminORecepcion(permissions.BasePermission):
     """
     Administrador o Recepción
@@ -46,22 +30,36 @@ class EsAdminORecepcion(permissions.BasePermission):
         )
 
 
-
 class EsDoctorDeLaConsulta(permissions.BasePermission):
     """
-    Solo el doctor que tiene asignada la consulta
+    El administrador puede hacer todo.
+    El doctor solo puede acceder a sus propias consultas.
     """
 
     def has_permission(self, request, view):
 
-        return (
-            request.user.is_authenticated and
-            hasattr(request.user, 'doctor')
-        )
+        if not request.user.is_authenticated:
+            return False
+
+        # Administrador
+        if (
+            hasattr(request.user, 'personal_perfil') and
+            request.user.personal_perfil.rol == 'ADMIN'
+        ):
+            return True
+
+        # Doctor
+        return hasattr(request.user, 'doctor')
 
 
     def has_object_permission(self, request, view, obj):
 
-        return (
-            obj.cita.doctor.usuario == request.user
-        )
+        # Administrador
+        if (
+            hasattr(request.user, 'personal_perfil') and
+            request.user.personal_perfil.rol == 'ADMIN'
+        ):
+            return True
+
+        # Doctor dueño de la consulta
+        return obj.cita.doctor.usuario == request.user

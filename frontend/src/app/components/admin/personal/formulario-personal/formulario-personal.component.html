@@ -1,131 +1,159 @@
-<div class="tarjeta-clinica contenedor-formulario">
-  <div class="cabecera-tabla">
-    <h3>{{ esEdicion ? 'Editar Personal' : 'Registrar Personal' }}</h3>
-    <a class="btn btn-eliminar" routerLink="/personal">Cancelar</a>
-  </div>
+<div class="formulario-container">
 
-  <form #formPersonal="ngForm"
-        (ngSubmit)="formPersonal.valid && guardarPersonal()"
-        class="cuerpo-formulario">
+  <h2>
+    Registrar Personal
+  </h2>
 
-    <!-- Usuario -->
-    <div class="campo-grupo">
-      <label>Usuario:</label>
-      <input
-        type="text"
-        [(ngModel)]="personal.username"
-        name="username"
-        required
-        minlength="4"
-        maxlength="30"
-        #user="ngModel">
 
-      <small *ngIf="user.invalid && user.touched" class="error-texto">
-        El usuario debe tener entre 4 y 30 caracteres.
-      </small>
+  <form>
+
+    <div class="fila">
+
+      <div class="campo">
+        <label>
+          Nombres
+        </label>
+
+        <input
+          type="text"
+          placeholder="Ingrese nombres"
+          name="nombres"
+          [(ngModel)]="personal.nombres"
+        >
+      </div>
+
+
+
+      <div class="campo">
+
+        <label>
+          Apellidos
+        </label>
+
+        <input
+          type="text"
+          placeholder="Ingrese apellidos"
+          name="apellidos"
+          [(ngModel)]="personal.apellidos"
+        >
+
+      </div>
+
     </div>
 
-    <!-- Contraseña -->
-    <div class="campo-grupo" *ngIf="!esEdicion">
-      <label>Contraseña:</label>
+    <div class="fila">
 
-      <input
-        type="password"
-        [(ngModel)]="personal.password"
-        name="password"
-        required
-        minlength="8"
-        #pass="ngModel">
 
-      <small *ngIf="pass.invalid && pass.touched" class="error-texto">
-        La contraseña debe tener mínimo 8 caracteres.
-      </small>
+      <div class="campo">
+
+        <label>
+          Usuario
+        </label>
+
+        <input
+          type="text"
+          placeholder="Nombre de usuario"
+          name="username"
+          [(ngModel)]="personal.username"
+        >
+
+      </div>
+
+
+
+      <div class="campo">
+
+        <label>
+          Correo
+        </label>
+
+        <input
+          type="email"
+          placeholder="correo@ejemplo.com"
+          name="correo"
+          [(ngModel)]="personal.correo"
+        >
+
+      </div>
+
+
     </div>
 
-    <!-- Nombres -->
-    <div class="campo-grupo">
-      <label>Nombres:</label>
+    <div class="fila">
 
-      <input
-        type="text"
-        [(ngModel)]="personal.nombres"
-        name="nombres"
-        required
-        minlength="2"
-        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*"
-        #nom="ngModel">
 
-      <small *ngIf="nom.invalid && nom.touched" class="error-texto">
-        Solo se permiten letras y mínimo 2 caracteres.
-      </small>
+      <div class="campo">
+
+        <label>
+          Contraseña
+        </label>
+
+        <input
+          type="password"
+          placeholder="Contraseña"
+          name="password"
+          [(ngModel)]="personal.password"
+        >
+
+      </div>
+
+
+      <div class="campo">
+
+        <label>
+          Teléfono
+        </label>
+
+        <input
+          type="text"
+          placeholder="999999999"
+          name="telefono"
+          [(ngModel)]="personal.telefono"
+        >
+
+      </div>
+
+
     </div>
 
-    <!-- Apellidos -->
-    <div class="campo-grupo">
-      <label>Apellidos:</label>
+    <div class="campo">
 
-      <input
-        type="text"
-        [(ngModel)]="personal.apellidos"
-        name="apellidos"
-        required
-        minlength="2"
-        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*"
-        #ape="ngModel">
+      <label>
+        Rol
+      </label>
 
-      <small *ngIf="ape.invalid && ape.touched" class="error-texto">
-        Solo se permiten letras y mínimo 2 caracteres.
-      </small>
-    </div>
-
-    <!-- Rol -->
-    <div class="campo-grupo">
-      <label>Rol:</label>
 
       <select
-        [(ngModel)]="personal.rol"
         name="rol"
-        required
-        #rol="ngModel">
+        [(ngModel)]="personal.rol"
+      >
 
-        <option value="" disabled>Seleccione...</option>
-        <option value="ADMIN">Administrador</option>
-        <option value="RECEPCION">Recepción</option>
+        <option value="">
+          Seleccione un rol
+        </option>
+
+        <option value="ADMIN">
+          Administrador
+        </option>
+
+        <option value="RECEPCION">
+          Recepcionista
+        </option>
+
 
       </select>
 
-      <small *ngIf="rol.invalid && rol.touched" class="error-texto">
-        Debe seleccionar un rol.
-      </small>
-    </div>
 
-    <!-- Teléfono -->
-    <div class="campo-grupo">
-      <label>Teléfono:</label>
-
-      <input
-        type="text"
-        [(ngModel)]="personal.telefono"
-        name="telefono"
-        required
-        minlength="9"
-        maxlength="9"
-        pattern="9[0-9]*"
-        #tel="ngModel">
-
-      <small *ngIf="tel.invalid && tel.touched" class="error-texto">
-        Debe empezar con 9 y tener 9 dígitos.
-      </small>
     </div>
 
     <button
       type="submit"
-      [disabled]="formPersonal.invalid"
-      class="btn btn-guardar">
-
-      {{ esEdicion ? 'Guardar Cambios' : 'Registrar Personal' }}
-
+      class="btn-guardar"
+    >
+      Guardar Personal
     </button>
 
+
   </form>
+
 </div>

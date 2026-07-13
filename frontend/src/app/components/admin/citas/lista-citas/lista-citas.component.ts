@@ -28,7 +28,7 @@ export class ListaCitasComponent implements OnInit {
 
   editarCita(c: Cita) {
     this.citaService.setCitaEditar(c);
-    this.router.navigate(['/citas/editar']);
+    this.router.navigate(['/admin/citas/editar']);
   }
 
   cargarCitas() {

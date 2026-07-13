@@ -28,7 +28,7 @@ export class ListaPacientesComponent implements OnInit {
 
   editarPaciente(p: Paciente): void {
     this.pacienteService.setPacienteEditar(p);
-    this.router.navigate(['/pacientes/editar']);
+    this.router.navigate(['/admin/pacientes/editar']);
   }
 
   cargarPacientes() {

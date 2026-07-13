@@ -3,143 +3,102 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { PersonalService } from '../../../../services/personal.service';
+import { PacienteService } from '../../../../services/paciente.service';
 
 @Component({
-  selector: 'app-formulario-personal',
+  selector: 'app-formulario-paciente',
   standalone: true,
   imports: [FormsModule, CommonModule, RouterModule],
-  templateUrl: './formulario-personal.component.html',
-  styleUrl: './formulario-personal.component.css'
+  templateUrl: './formulario-paciente.component.html',
+  styleUrl: './formulario-paciente.component.css'
 })
-export class FormularioPersonalComponent implements OnInit {
+export class FormularioPacienteComponent implements OnInit {
 
-  personal: any = {
-    username: '',
-    password: '',
-    email: '',
+  paciente: any = {
+    dni: '',
     nombres: '',
     apellidos: '',
-    rol: '',
+    fecha_nacimiento: '', 
+    sexo: '',             
     telefono: ''
   };
 
   // Control de edición
   esEdicion: boolean = false;
-  idPersonal: number | null = null;
+  idPaciente: number | null = null;
+  fechaMaxima: string = '';
 
-  constructor(private personalService: PersonalService) {}
+  constructor(private pacienteService: PacienteService) {}
 
   ngOnInit(): void {
 
-    const data = this.personalService.getPersonalEditar();
-
+    const hoy = new Date();
+    this.fechaMaxima = hoy.toISOString().split('T')[0];
+    
+    const data = this.pacienteService.getPacienteEditar();
     if (data) {
-
-      this.personal = {
-        ...data,
-        password: '' // nunca mostramos la contraseña
-      };
-
+      this.paciente = { ...data};
       this.esEdicion = true;
-      this.idPersonal = data.id!;
+      this.idPaciente = data.id!;
 
-      this.personalService.limpiarPersonalEditar();
-
+      // Limpiamos el servicio después de cargar
+      this.pacienteService.limpiarPacienteEditar();
     } else {
-
+      // En caso no haya nada, aseguramos que el formulario esté limpio
       this.reset();
-
     }
-
   }
 
-  guardarPersonal() {
-
-    // ==========================
-    // EDITAR
-    // ==========================
-    if (this.esEdicion && this.idPersonal) {
-
-      const datosActualizar = {
-        username: this.personal.username,
-        email: this.personal.email,
-        nombres: this.personal.nombres,
-        apellidos: this.personal.apellidos,
-        rol: this.personal.rol,
-        telefono: this.personal.telefono
-      };
-
-      this.personalService.actualizarPersonal(
-        this.idPersonal,
-        datosActualizar as any
-      ).subscribe({
-
-        next: () => {
-          alert('Personal actualizado correctamente');
-          this.reset();
-        },
-
-        error: (err) => {
-          alert('Error al actualizar el personal');
-          console.error(err);
-        }
-
-      });
-
-    }
-
-    // ==========================
-    // CREAR
-    // ==========================
-    else {
-
-      this.personalService.registrarPersonal(this.personal)
+  // CREATE + UPDATE
+  guardarPaciente() {
+    // Modo Edición (PUT)
+    if (this.esEdicion && this.idPaciente) {
+      this.pacienteService.actualizarPaciente(this.idPaciente, this.paciente)
         .subscribe({
-
           next: () => {
-            alert('Personal registrado correctamente');
+            alert('Paciente actualizado correctamente');
             this.reset();
           },
-
           error: (err) => {
-            alert('Error al registrar el personal');
+            alert('Error al actualizar: Revisa la consola o las validaciones');
             console.error(err);
           }
-
         });
-
+    } 
+    // Modo Creación (POST)
+    else {
+      this.pacienteService.crearPaciente(this.paciente)
+        .subscribe({
+          next: () => {
+            alert('Paciente registrado correctamente');
+            this.reset();
+          },
+          error: (err) => {
+            alert('Error al registrar: Revisa que el DNI/Teléfono cumplan el formato');
+            console.error(err);
+          }
+        });
     }
-
   }
 
-  editarPersonal(p: any) {
-
-    this.personal = {
-      ...p,
-      password: ''
-    };
-
-    this.idPersonal = p.id;
+  // Activar modo edición desde la lista
+  editarPaciente(p: any) {
+    this.paciente = { ...p }; // Copia superficial del objeto
+    this.idPaciente = p.id;
     this.esEdicion = true;
-
   }
 
+  // Limpiar formulario y restablecer estados
   reset() {
-
-    this.personal = {
-      username: '',
-      password: '',
-      email: '',
+    this.paciente = {
+      dni: '',
       nombres: '',
       apellidos: '',
-      rol: '',
+      fecha_nacimiento: '',
+      sexo: '',
       telefono: ''
     };
-
     this.esEdicion = false;
-    this.idPersonal = null;
-
+    this.idPaciente = null;
   }
-
 }

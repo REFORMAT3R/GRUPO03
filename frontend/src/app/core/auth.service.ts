@@ -180,26 +180,16 @@ export class AuthService {
 
   rutaSegunRol(): string {
 
+  switch(this.getRol()){
 
-    switch(this.getRol()) {
-
-
-      case 'DOCTOR':
-        return '/doctor';
+    case 'ADMIN':
+      return '/admin/dashboard';
 
 
-      case 'RECEPCION':
-        return '/recepcionista';
+    default:
+      return '/login';
 
-
-      case 'ADMIN':
-        return '/dashboard';
-
-
-      default:
-        return '/login';
-
-    }
+  }
 
   }
 

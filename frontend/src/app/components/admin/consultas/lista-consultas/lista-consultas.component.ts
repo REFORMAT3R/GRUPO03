@@ -27,7 +27,7 @@ export class ListaConsultasComponent implements OnInit {
 
   editarConsulta(c: any) {
     this.consultaService.setConsultaEditar(c);
-    this.router.navigate(['/consultas/editar']);
+    this.router.navigate(['/admin/consultas/editar']);
   }
 
   obtenerConsultas(): void {

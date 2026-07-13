@@ -1,41 +1,81 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+
 import { AuthService } from '../../../core/auth.service';
- 
+
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrl: './login.component.css'
 })
 export class LoginComponent {
- 
-  credenciales = { usuario: '', password: '' };
-  cargando = false;
-  errorMensaje = '';
- 
-  constructor(private authService: AuthService, private router: Router) {}
- 
-  ingresar(): void {
-    this.errorMensaje = '';
-    this.cargando = true;
- 
-    this.authService.login(this.credenciales.usuario, this.credenciales.password).subscribe({
-      next: () => {
-        this.cargando = false;
-        this.router.navigate([this.authService.rutaSegunRol()]);
+
+
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+
+  username: string = '';
+  password: string = '';
+
+  error: string = '';
+
+
+
+  iniciarSesion() {
+
+
+    this.error = '';
+
+
+    this.authService.login(
+      this.username,
+      this.password
+
+    ).subscribe({
+
+      next: (perfil) => {
+
+
+        console.log(
+          'Usuario:',
+          perfil
+        );
+
+
+        this.router.navigate([
+          this.authService.rutaSegunRol()
+        ]);
+
+
       },
+
+
       error: (err) => {
-        this.cargando = false;
-        if (err.status === 401) {
-          this.errorMensaje = 'Usuario o contraseña incorrectos.';
-        } else {
-          this.errorMensaje = 'No se pudo iniciar sesión. Intenta nuevamente.';
-        }
+
+
+        console.error(
+          err
+        );
+
+
+        this.error =
+          'Usuario o contraseña incorrectos';
+
+
       }
+
+
     });
+
+
   }
+
+
 }

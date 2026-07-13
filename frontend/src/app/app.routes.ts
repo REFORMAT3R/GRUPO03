@@ -21,42 +21,118 @@ import { FormularioConsultaComponent } from './components/admin/consultas/formul
 import { authGuard } from './core/auth.guard';
 import { rolGuard } from './core/rol.guard';
 
+
+
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'IndexComponent',
-    pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    component: LoginComponent
+
+{
+  path:'',
+  component:IndexComponent
+},
+
+
+{
+  path:'login',
+  component:LoginComponent
+},
+
+
+{
+  path:'admin',
+
+  component:AdminLayoutComponent,
+
+  canActivate:[
+    authGuard,
+    rolGuard
+  ],
+
+  data:{
+    roles:['ADMIN']
   },
 
-  {
-    path: '',
-    component: AdminLayoutComponent,
-    canActivate: [authGuard, rolGuard],
-    data: { roles: ['ADMIN'] },
-    children: [
-      { path: 'dashboard', component: DashboardComponent },
- 
-      { path: 'pacientes', component: ListaPacientesComponent },
-      { path: 'pacientes/nuevo', component: FormularioPacienteComponent },
-      { path: 'pacientes/editar', component: FormularioPacienteComponent },
- 
-      { path: 'citas', component: ListaCitasComponent },
-      { path: 'citas/nuevo', component: FormularioCitaComponent },
-      { path: 'citas/editar', component: FormularioCitaComponent },
- 
-      { path: 'doctores', component: ListaDoctoresComponent },
-      { path: 'doctores/nuevo', component: FormularioDoctorComponent },
-      { path: 'doctores/editar', component: FormularioDoctorComponent },
- 
-      { path: 'consultas', component: ListaConsultasComponent },
-      { path: 'consultas/nuevo', component: FormularioConsultaComponent },
-      { path: 'consultas/editar', component: FormularioConsultaComponent },
-    ]
-  },
 
-  // Falta /doctor y /recepcionista
+children: [
+
+    {
+      path:'dashboard',
+      component:DashboardComponent
+    },
+
+    {
+      path:'pacientes',
+      component:ListaPacientesComponent
+    },
+
+    {
+      path:'pacientes/nuevo',
+      component:FormularioPacienteComponent
+    },
+
+    {
+      path:'pacientes/editar',
+      component:FormularioPacienteComponent
+    },
+
+    {
+      path:'citas',
+      component:ListaCitasComponent
+    },
+
+    {
+      path:'citas/nuevo',
+      component:FormularioCitaComponent
+    },
+
+    {
+      path:'citas/editar',
+      component:FormularioCitaComponent
+    },
+
+    {
+      path:'doctores',
+      component:ListaDoctoresComponent
+    },
+
+    {
+      path:'doctores/nuevo',
+      component:FormularioDoctorComponent
+    },
+
+    {
+      path:'doctores/editar',
+      component:FormularioDoctorComponent
+    },
+
+    {
+      path:'consultas',
+      component:ListaConsultasComponent
+    },
+
+    {
+      path:'consultas/nuevo',
+      component:FormularioConsultaComponent
+    },
+
+    {
+      path:'consultas/editar',
+      component:FormularioConsultaComponent
+    },
+
+    {
+      path:'',
+      redirectTo:'dashboard',
+      pathMatch:'full'
+    }
+
+  ]
+
+},
+
+
+{
+ path:'**',
+ redirectTo:'login'
+}
+
 ];

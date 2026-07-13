@@ -1,7 +1,7 @@
 <div class="tarjeta-clinica contenedor-formulario">
   <div class="cabecera-tabla cabecera-azul">
     <h3>{{ esEdicion ? 'Editar Personal Médico' : 'Registrar Nuevo Doctor' }}</h3>
-    <a class="btn btn-eliminar" routerLink="/doctores">Cancelar</a>
+    <a class="btn btn-eliminar" routerLink="/admin/doctores">Cancelar</a>
   </div>
 
   <form #formDoc="ngForm" (ngSubmit)="formDoc.valid && guardarDoctor()" class="cuerpo-formulario">

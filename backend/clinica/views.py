@@ -25,7 +25,6 @@ from .serializers import (
 
 from .permissions import (
     EsAdmin,
-    EsRecepcion,
     EsAdminORecepcion,
     EsDoctorDeLaConsulta
 )
@@ -136,7 +135,7 @@ class CitaViewSet(viewsets.ModelViewSet):
 
     # Recepción administra citas
     permission_classes = [
-        EsRecepcion
+        EsAdminORecepcion
     ]
 
 
