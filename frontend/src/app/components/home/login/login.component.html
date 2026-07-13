@@ -2,19 +2,21 @@
   <form #formLogin="ngForm" (ngSubmit)="ingresar()" class="tarjeta-clinica">
     <h2>Acceso al Sistema</h2>
     <p>Clínica Moisés Heresi</p>
-
+ 
     <div class="campo-grupo">
       <label>Usuario:</label>
       <input type="text" [(ngModel)]="credenciales.usuario" name="usuario" required #user="ngModel">
     </div>
-
+ 
     <div class="campo-grupo">
       <label>Contraseña:</label>
       <input type="password" [(ngModel)]="credenciales.password" name="password" required #pass="ngModel">
     </div>
-
-    <button type="submit" [disabled]="formLogin.invalid" class="btn-guardar">
-      Iniciar Sesión
+ 
+    <p *ngIf="errorMensaje" class="mensaje-error">{{ errorMensaje }}</p>
+ 
+    <button type="submit" [disabled]="formLogin.invalid || cargando" class="btn-guardar">
+      {{ cargando ? 'Ingresando...' : 'Iniciar Sesión' }}
     </button>
   </form>
 </div>

@@ -1,0 +1,13 @@
+<nav class="navbar-clinica">
+  <a routerLink="/" class="navbar-logo">Clínica Moisés Heresi</a>
+ 
+  <div class="navbar-usuario" *ngIf="auth.perfil() as perfil">
+    <span class="navbar-nombre">
+      {{ perfil.nombres }} {{ perfil.apellidos }}
+      <span class="navbar-rol">({{ etiquetaRol() }})</span>
+    </span>
+    <button type="button" class="navbar-btn-salir" (click)="cerrarSesion()">
+      Cerrar sesión
+    </button>
+  </div>
+</nav>

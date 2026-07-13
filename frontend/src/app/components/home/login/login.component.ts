@@ -1,30 +1,40 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../../services/auth.service'; // Asegúrate de que la ruta sea correcta
-
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../core/auth.service';
+ 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  
+ 
   credenciales = { usuario: '', password: '' };
-
+  cargando = false;
+  errorMensaje = '';
+ 
   constructor(private authService: AuthService, private router: Router) {}
-
-  ingresar() {
-    this.authService.iniciarSesion(this.credenciales).subscribe({
-      next: (res) => {
-        
-        this.router.navigate(['/pacientes']);
+ 
+  ingresar(): void {
+    this.errorMensaje = '';
+    this.cargando = true;
+ 
+    this.authService.login(this.credenciales.usuario, this.credenciales.password).subscribe({
+      next: () => {
+        this.cargando = false;
+        this.router.navigate([this.authService.rutaSegunRol()]);
       },
       error: (err) => {
-        
-        alert('Error: Usuario o contraseña incorrectos.');
+        this.cargando = false;
+        if (err.status === 401) {
+          this.errorMensaje = 'Usuario o contraseña incorrectos.';
+        } else {
+          this.errorMensaje = 'No se pudo iniciar sesión. Intenta nuevamente.';
+        }
       }
     });
   }

@@ -1,0 +1,58 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+ 
+import { Receta } from '../models/receta';
+ 
+@Injectable({
+  providedIn: 'root'
+})
+export class RecetaService {
+ 
+  private apiUrl = 'http://localhost:8000/api/recetas/';
+ 
+  constructor(private http: HttpClient) {}
+ 
+  private recetaEditar: Receta | null = null;
+ 
+  setRecetaEditar(r: Receta): void {
+    this.recetaEditar = r;
+  }
+ 
+  getRecetaEditar(): Receta | null {
+    return this.recetaEditar;
+  }
+ 
+  limpiarRecetaEditar(): void {
+    this.recetaEditar = null;
+  }
+ 
+  getRecetas(): Observable<Receta[]> {
+    return this.http.get<Receta[]>(this.apiUrl);
+  }
+ 
+  
+  getRecetasPorConsulta(consultaId: number): Observable<Receta[]> {
+    return new Observable<Receta[]>(observer => {
+      this.getRecetas().subscribe({
+        next: (recetas) => {
+          observer.next(recetas.filter(r => r.consulta === consultaId));
+          observer.complete();
+        },
+        error: (err) => observer.error(err)
+      });
+    });
+  }
+ 
+  crearReceta(receta: Receta): Observable<Receta> {
+    return this.http.post<Receta>(this.apiUrl, receta);
+  }
+ 
+  actualizarReceta(id: number, receta: Receta): Observable<Receta> {
+    return this.http.put<Receta>(`${this.apiUrl}${id}/`, receta);
+  }
+ 
+  eliminarReceta(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}${id}/`);
+  }
+}

@@ -1,15 +1,1 @@
-<nav class="menu-clinica" *ngIf="mostrarMenu">
-  <div class="contenedor-menu">
-    <a routerLink="/" class="logo">{{ title }}</a>
-    <div class="enlaces">
-      <a routerLink="/pacientes" routerLinkActive="activo">Pacientes</a>
-      <a routerLink="/citas" routerLinkActive="activo">Citas Médicas</a>
-      <a routerLink="/doctores" routerLinkActive="activo">Doctores</a>
-      <a routerLink="/consultas" routerLinkActive="activo">Consultas</a>
-    </div>
-  </div>
-</nav>
-
-<div class="contenedor-principal">
-  <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>

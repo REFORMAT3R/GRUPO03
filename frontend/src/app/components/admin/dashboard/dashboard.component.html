@@ -1,0 +1,11 @@
+<div class="dashboard-admin">
+  <h2>Panel de Administración</h2>
+  <p class="dashboard-subtitulo">Resumen general de la clínica</p>
+ 
+  <div class="dashboard-grid">
+    <a *ngFor="let tarjeta of tarjetas" [routerLink]="tarjeta.ruta" class="dashboard-tarjeta">
+      <span class="dashboard-numero">{{ tarjeta.total ?? '—' }}</span>
+      <span class="dashboard-etiqueta">{{ tarjeta.etiqueta }}</span>
+    </a>
+  </div>
+</div>

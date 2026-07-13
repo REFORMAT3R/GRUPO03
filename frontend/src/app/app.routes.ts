@@ -1,6 +1,10 @@
 import { Routes } from '@angular/router';
 
+import { IndexComponent } from './components/home/index/index.component';
 import { LoginComponent } from './components/home/login/login.component';
+
+import { AdminLayoutComponent } from './components/admin/admin-layout/admin-layout.component';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 
 import { ListaPacientesComponent } from './components/admin/pacientes/lista-pacientes/lista-pacientes.component';
 import { FormularioPacienteComponent } from './components/admin/pacientes/formulario-paciente/formulario-paciente.component';
@@ -14,62 +18,45 @@ import { FormularioDoctorComponent } from './components/admin/doctores/formulari
 import { ListaConsultasComponent } from './components/admin/consultas/lista-consultas/lista-consultas.component';
 import { FormularioConsultaComponent } from './components/admin/consultas/formulario-consulta/formulario-consulta.component';
 
+import { authGuard } from './core/auth.guard';
+import { rolGuard } from './core/rol.guard';
+
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'IndexComponent',
     pathMatch: 'full'
   },
   {
     path: 'login',
     component: LoginComponent
   },
+
   {
-    path: 'pacientes',
-    component: ListaPacientesComponent
+    path: '',
+    component: AdminLayoutComponent,
+    canActivate: [authGuard, rolGuard],
+    data: { roles: ['ADMIN'] },
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+ 
+      { path: 'pacientes', component: ListaPacientesComponent },
+      { path: 'pacientes/nuevo', component: FormularioPacienteComponent },
+      { path: 'pacientes/editar', component: FormularioPacienteComponent },
+ 
+      { path: 'citas', component: ListaCitasComponent },
+      { path: 'citas/nuevo', component: FormularioCitaComponent },
+      { path: 'citas/editar', component: FormularioCitaComponent },
+ 
+      { path: 'doctores', component: ListaDoctoresComponent },
+      { path: 'doctores/nuevo', component: FormularioDoctorComponent },
+      { path: 'doctores/editar', component: FormularioDoctorComponent },
+ 
+      { path: 'consultas', component: ListaConsultasComponent },
+      { path: 'consultas/nuevo', component: FormularioConsultaComponent },
+      { path: 'consultas/editar', component: FormularioConsultaComponent },
+    ]
   },
-  {
-    path: 'pacientes/nuevo',
-    component: FormularioPacienteComponent
-  },
-  {
-    path: 'pacientes/editar',
-    component: FormularioPacienteComponent
-  },
-  {
-    path: 'citas',
-    component: ListaCitasComponent
-  },
-  {
-    path: 'citas/nuevo',
-    component: FormularioCitaComponent
-  },
-  {
-    path: 'citas/editar',
-    component: FormularioCitaComponent
-  },
-  { 
-    path: 'doctores', 
-    component: ListaDoctoresComponent
-  },
-  { 
-    path: 'doctores/nuevo', 
-    component: FormularioDoctorComponent
-  },
-  { 
-    path: 'doctores/editar', 
-    component: FormularioDoctorComponent 
-  },
-  { 
-    path: 'consultas', 
-    component: ListaConsultasComponent
-  },
-  { 
-    path: 'consultas/nuevo', 
-    component: FormularioConsultaComponent
-  },
-  { 
-    path: 'consultas/editar', 
-    component: FormularioConsultaComponent 
-  },
+
+  // Falta /doctor y /recepcionista
 ];

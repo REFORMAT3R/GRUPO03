@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh; /* Ajuste para que se vea centrado */
+  min-height: 80vh;
   background-color: #f4f7f6;
 }
 
@@ -47,4 +47,14 @@
 
 .btn-guardar:disabled {
   background-color: #ccc;
+}
+
+.mensaje-error {
+  color: #c0392b;
+  background-color: #fdecea;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
 }
