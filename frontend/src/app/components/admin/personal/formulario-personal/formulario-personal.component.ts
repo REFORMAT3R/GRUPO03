@@ -81,7 +81,7 @@ export class FormularioPersonalComponent implements OnInit {
     // CREAR
     else {
 
-      this.personalService.crearPersonal(this.personal)
+      this.personalService.registrarPersonal(this.personal)
         .subscribe({
 
           next: () => {

@@ -1,12 +1,6 @@
 export interface Personal {
   id?: number;
-
-  // Datos del usuario de Django
-  username: string;
-  password?: string;
-  email: string;
-
-  // Datos del personal
+  usuario: number;
   nombres: string;
   apellidos: string;
   rol: 'ADMIN' | 'RECEPCION';

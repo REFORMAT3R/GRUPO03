@@ -1,0 +1,24 @@
+[33m233ca2e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mbackend[m[33m, [m[1;31morigin/backend[m[33m)[m HEAD@{0}: checkout: moving from Frontend to backend
+[33mde0656a[m[33m ([m[1;32mFrontend[m[33m)[m HEAD@{1}: commit: Arreglo y estructura general
+[33md8e0bab[m HEAD@{2}: commit: Mejorando backend (permisos)
+[33m24d0efd[m[33m ([m[1;31morigin/Frontend[m[33m)[m HEAD@{3}: reset: moving to origin/Frontend
+[33mb666d38[m HEAD@{4}: reset: moving to HEAD
+[33mb666d38[m HEAD@{5}: checkout: moving from Frontend-jwt-roles to Frontend
+[33m79b9a7b[m[33m ([m[1;31morigin/Frontend-jwt-roles[m[33m, [m[1;32mFrontend-jwt-roles[m[33m)[m HEAD@{6}: reset: moving to HEAD
+[33m79b9a7b[m[33m ([m[1;31morigin/Frontend-jwt-roles[m[33m, [m[1;32mFrontend-jwt-roles[m[33m)[m HEAD@{7}: checkout: moving from Frontend to Frontend-jwt-roles
+[33mb666d38[m HEAD@{8}: commit: Añadiendo archivos para tipear
+[33m83af340[m HEAD@{9}: commit: Reorganizando fronted
+[33mfce40d9[m HEAD@{10}: pull origin Frontend: Fast-forward
+[33me7ede88[m HEAD@{11}: commit: Validando mas campos
+[33m356f525[m HEAD@{12}: checkout: moving from backend to Frontend
+[33m233ca2e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mbackend[m[33m, [m[1;31morigin/backend[m[33m)[m HEAD@{13}: pull origin main: Fast-forward
+[33m814278a[m HEAD@{14}: pull origin main: Fast-forward
+[33m6b96f4d[m HEAD@{15}: commit: Agregando carpeta backend
+[33m43d2927[m HEAD@{16}: commit: Agregando carpeta backend
+[33m2cb2446[m HEAD@{17}: reset: moving to origin/main
+[33ma2eb2a5[m HEAD@{18}: commit: Creando migraciones
+[33m991be46[m HEAD@{19}: commit: Añadiendo serializers, views y urls
+[33maa6e170[m HEAD@{20}: commit: Registrando tablas (puede cambiar)
+[33ma9ee624[m HEAD@{21}: commit: Comenzando app
+[33m8bcbc7e[m[33m ([m[1;32mmain[m[33m)[m HEAD@{22}: checkout: moving from main to backend
+[33m8bcbc7e[m[33m ([m[1;32mmain[m[33m)[m HEAD@{23}: commit (initial): Inicio del proyecto

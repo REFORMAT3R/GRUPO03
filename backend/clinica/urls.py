@@ -9,7 +9,8 @@ from .views import (
     RecetaViewSet,
     PersonalViewSet,
     RegistrarDoctorView,
-    RegistrarPersonalView
+    RegistrarPersonalView,
+    PerfilUsuarioView
 )
 
 
@@ -43,4 +44,9 @@ urlpatterns = [
         '',
         include(router.urls)
     ),
+
+    path(
+    'perfil/',
+    PerfilUsuarioView.as_view()
+),
 ]

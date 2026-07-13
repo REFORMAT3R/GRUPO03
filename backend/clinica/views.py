@@ -1,6 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from .models import (
     Doctor,
@@ -161,3 +162,46 @@ class RecetaViewSet(viewsets.ModelViewSet):
     permission_classes = [
         EsDoctorDeLaConsulta
     ]
+
+class PerfilUsuarioView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+
+    def get(self, request):
+
+        usuario = request.user
+
+
+        if hasattr(usuario, 'doctor'):
+
+            doctor = usuario.doctor
+
+            return Response({
+                "tipo": "doctor",
+                "id": doctor.id,
+                "usuarioId": usuario.id,
+                "nombres": doctor.nombres,
+                "apellidos": doctor.apellidos,
+                "rol": "DOCTOR"
+            })
+
+
+        if hasattr(usuario, 'personal_perfil'):
+
+            personal = usuario.personal_perfil
+
+            return Response({
+                "tipo": "personal",
+                "id": personal.id,
+                "usuarioId": usuario.id,
+                "nombres": personal.nombres,
+                "apellidos": personal.apellidos,
+                "rol": personal.rol
+            })
+
+
+        return Response(
+            {"error":"Sin perfil asociado"},
+            status=400
+        )
