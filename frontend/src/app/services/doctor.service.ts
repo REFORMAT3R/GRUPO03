@@ -2,46 +2,110 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class DoctorService {
 
-  private apiUrl = 'http://localhost:8000/api/doctores/'; 
 
-  constructor(private http: HttpClient) { }
+  private apiUrl = 'http://localhost:8000/api/doctores/';
+  
+  private registrarUrl = 'http://localhost:8000/api/doctores/registrar/';
+
+
+  constructor(
+    private http: HttpClient
+  ) {}
+
+
+
+  // ==========================
+  // CONTROL DE EDICIÓN
+  // ==========================
+
 
   private doctorEditar: any = null;
 
-  setDoctorEditar(d: any) {
+
+  setDoctorEditar(d:any){
+
     this.doctorEditar = d;
+
   }
 
-  getDoctorEditar() {
+
+  getDoctorEditar(){
+
     return this.doctorEditar;
+
   }
 
-  limpiarDoctorEditar() {
+
+  limpiarDoctorEditar(){
+
     this.doctorEditar = null;
+
   }
 
-  // GET: Obtener todos los doctores
-  getDoctores(): Observable<any[]> {
+
+
+  // ==========================
+  // CRUD DOCTOR
+  // ==========================
+
+
+  // Obtener doctores
+
+  getDoctores(): Observable<any[]>{
+
     return this.http.get<any[]>(this.apiUrl);
+
   }
 
-  // POST: Registrar un nuevo doctor
-  crearDoctor(doctor: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, doctor);
+
+
+
+  // Registrar doctor con usuario Django
+
+  crearDoctor(doctor:any): Observable<any>{
+
+    return this.http.post<any>(
+      this.registrarUrl,
+      doctor
+    );
+
   }
 
-  // PUT: Actualizar un doctor existente
-  actualizarDoctor(id: number, doctor: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}${id}/`, doctor);
+
+
+
+  // Actualizar doctor
+
+  actualizarDoctor(
+    id:number,
+    doctor:any
+  ):Observable<any>{
+
+    return this.http.put<any>(
+      `${this.apiUrl}${id}/`,
+      doctor
+    );
+
   }
 
-  // DELETE: Eliminar un doctor
-  eliminarDoctor(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}${id}/`);
+
+
+
+  // Eliminar doctor
+
+  eliminarDoctor(id:number):Observable<any>{
+
+    return this.http.delete<any>(
+      `${this.apiUrl}${id}/`
+    );
+
   }
+
+
 }

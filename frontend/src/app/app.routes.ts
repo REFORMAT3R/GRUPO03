@@ -21,10 +21,11 @@ import { FormularioConsultaComponent } from './components/admin/consultas/formul
 import { ListaPersonalComponent } from './components/admin/personal/lista-personal/lista-personal.component';
 import { FormularioPersonalComponent } from './components/admin/personal/formulario-personal/formulario-personal.component';
 
+import { DoctorLayoutComponent } from './components/doctor/doctor-layout/doctor-layout.component';
+import { DoctorDashboardComponent } from './components/doctor/dashboard/dashboard.component';
+
 import { authGuard } from './core/auth.guard';
 import { rolGuard } from './core/rol.guard';
-
-
 
 export const routes: Routes = [
 
@@ -33,29 +34,22 @@ export const routes: Routes = [
   component:IndexComponent
 },
 
-
 {
   path:'login',
   component:LoginComponent
 },
 
-
 {
   path:'admin',
-
   component:AdminLayoutComponent,
-
   canActivate:[
     authGuard,
     rolGuard
   ],
-
   data:{
     roles:['ADMIN']
   },
-
-
-children: [
+  children:[
 
     {
       path:'dashboard',
@@ -123,18 +117,18 @@ children: [
     },
 
     {
-      path: 'personal',
-      component: ListaPersonalComponent
+      path:'personal',
+      component:ListaPersonalComponent
     },
 
     {
-      path: 'personal/nuevo',
-      component: FormularioPersonalComponent
+      path:'personal/nuevo',
+      component:FormularioPersonalComponent
     },
 
     {
-      path: 'personal/editar',
-      component: FormularioPersonalComponent
+      path:'personal/editar',
+      component:FormularioPersonalComponent
     },
 
     {
@@ -144,13 +138,37 @@ children: [
     }
 
   ]
-
 },
 
+{
+  path:'doctor',
+  component:DoctorLayoutComponent,
+  canActivate:[
+    authGuard,
+    rolGuard
+  ],
+  data:{
+    roles:['DOCTOR']
+  },
+  children:[
+
+    {
+      path:'dashboard',
+      component:DoctorDashboardComponent
+    },
+
+    {
+      path:'',
+      redirectTo:'dashboard',
+      pathMatch:'full'
+    }
+
+  ]
+},
 
 {
- path:'**',
- redirectTo:'login'
+  path:'**',
+  redirectTo:'login'
 }
 
 ];

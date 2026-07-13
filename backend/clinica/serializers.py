@@ -51,13 +51,11 @@ class DoctorRegistroSerializer(serializers.Serializer):
 class DoctorSerializer(serializers.ModelSerializer):
 
     username = serializers.CharField(
-        source='usuario.username',
-        read_only=True
+        source='usuario.username'
     )
 
     email = serializers.EmailField(
-        source='usuario.email',
-        read_only=True
+        source='usuario.email'
     )
 
     class Meta:
@@ -72,6 +70,56 @@ class DoctorSerializer(serializers.ModelSerializer):
             'telefono',
             'correo'
         ]
+
+    def update(self, instance, validated_data):
+
+        usuario_data = validated_data.pop(
+            'usuario',
+            {}
+        )
+
+        instance.nombres = validated_data.get(
+            'nombres',
+            instance.nombres
+        )
+
+        instance.apellidos = validated_data.get(
+            'apellidos',
+            instance.apellidos
+        )
+
+        instance.especialidad = validated_data.get(
+            'especialidad',
+            instance.especialidad
+        )
+
+        instance.telefono = validated_data.get(
+            'telefono',
+            instance.telefono
+        )
+
+        instance.correo = validated_data.get(
+            'correo',
+            instance.correo
+        )
+
+        instance.save()
+
+        usuario = instance.usuario
+
+        usuario.username = usuario_data.get(
+            'username',
+            usuario.username
+        )
+
+        usuario.email = usuario_data.get(
+            'email',
+            usuario.email
+        )
+
+        usuario.save()
+
+        return instance
 
 
 

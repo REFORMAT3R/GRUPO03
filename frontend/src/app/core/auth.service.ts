@@ -76,8 +76,6 @@ export class AuthService {
 
   }
 
-
-
   private obtenerPerfil(): Observable<PerfilUsuario> {
 
 
@@ -95,8 +93,6 @@ export class AuthService {
 
   }
 
-
-
   private guardarPerfil(
     perfil: PerfilUsuario
   ): void {
@@ -112,8 +108,6 @@ export class AuthService {
 
   }
 
-
-
   private cargarPerfilGuardado(): PerfilUsuario | null {
 
 
@@ -128,8 +122,6 @@ export class AuthService {
 
   }
 
-
-
   getAccessToken(): string | null {
 
     return localStorage.getItem(
@@ -138,8 +130,6 @@ export class AuthService {
 
   }
 
-
-
   getRefreshToken(): string | null {
 
     return localStorage.getItem(
@@ -147,8 +137,6 @@ export class AuthService {
     );
 
   }
-
-
 
   estaAutenticado(): boolean {
 
@@ -160,15 +148,11 @@ export class AuthService {
 
   }
 
-
-
   getRol(): Rol | null {
 
     return this.perfil()?.rol ?? null;
 
   }
-
-
 
   getPerfil(): PerfilUsuario | null {
 
@@ -176,24 +160,25 @@ export class AuthService {
 
   }
 
-
-
   rutaSegunRol(): string {
 
-  switch(this.getRol()){
+    switch(this.getRol()){
 
-    case 'ADMIN':
-      return '/admin/dashboard';
+      case 'ADMIN':
+        return '/admin';
 
+      case 'DOCTOR':
+        return '/doctor';
 
-    default:
-      return '/login';
+      case 'RECEPCION':
+        return '/recepcionista';
+
+      default:
+        return '/login';
+
+    }
 
   }
-
-  }
-
-
 
   logout(): void {
 

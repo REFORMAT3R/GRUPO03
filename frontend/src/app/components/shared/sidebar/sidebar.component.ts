@@ -20,7 +20,7 @@ export class SidebarComponent {
  
   private enlacesPorRol: Record<string, EnlaceMenu[]> = {
     ADMIN: [
-      { ruta: '/admin', etiqueta: 'Mi Panel'},
+      { ruta: '/admin/dashboard', etiqueta: 'Mi Panel'},
       { ruta: '/admin/pacientes', etiqueta: 'Pacientes' },
       { ruta: '/admin/citas', etiqueta: 'Citas' },
       { ruta: '/admin/personal', etiqueta: 'Personal' },
@@ -28,11 +28,12 @@ export class SidebarComponent {
       { ruta: '/admin/consultas', etiqueta: 'Consultas' }
     ],
     DOCTOR: [
-      { ruta: '/doctor', etiqueta: 'Mi Panel' },
-      { ruta: '/doctor/mis-citas', etiqueta: 'Mis Citas' }
+      { ruta: '/doctor/dashboard', etiqueta: 'Mi Panel' },
+      { ruta: '/doctor/mis-citas', etiqueta: 'Mis Citas' },
+      { ruta: '/doctor/registrar-consulta', etiqueta: 'Registrar Consuta' }
     ],
     RECEPCION: [
-      { ruta: '/recepcionista', etiqueta: 'Mi Panel' },
+      { ruta: '/recepcionista/dashboard', etiqueta: 'Mi Panel' },
       { ruta: '/recepcionista/nueva-cita', etiqueta: 'Nueva Cita' },
       { ruta: '/recepcionista/nuevo-paciente', etiqueta: 'Nuevo Paciente' }
     ]
