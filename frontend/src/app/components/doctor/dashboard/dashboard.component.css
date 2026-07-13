@@ -1,0 +1,92 @@
+.doctor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+ 
+.doctor-header h1 {
+  margin: 0 0 4px;
+  color: #2c3e50;
+  font-size: 22px;
+}
+ 
+.doctor-header p {
+  margin: 0;
+  color: #7f8c8d;
+}
+ 
+.doctor-icon {
+  font-size: 36px;
+}
+ 
+.tarjetas-medicas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+ 
+.tarjetas-medicas .tarjeta {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  text-align: center;
+  border-top: 4px solid #3498db;
+}
+ 
+.tarjetas-medicas h3 {
+  margin: 0 0 8px;
+  color: #7f8c8d;
+  font-size: 14px;
+}
+ 
+.tarjetas-medicas .numero {
+  font-size: 30px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0;
+}
+ 
+.tarjetas-medicas span {
+  font-size: 12px;
+  color: #95a5a6;
+}
+ 
+.acciones-doctor {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+}
+ 
+.acciones-doctor h2 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 18px;
+}
+ 
+.botones {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+ 
+.botones a {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+ 
+.botones a:hover {
+  background-color: #2980b9;
+}

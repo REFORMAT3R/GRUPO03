@@ -20,7 +20,7 @@
 
     <div class="campo-grupo">
       <label>Plan de Tratamiento:</label>
-      <textarea [(ngModel)]="consulta.treatment" [(ngModel)]="consulta.tratamiento" name="tratamiento" required rows="3" #trat="ngModel"></textarea>
+      <textarea [(ngModel)]="consulta.tratamiento" name="tratamiento" required rows="3" #trat="ngModel"></textarea>
       <small *ngIf="trat.invalid && trat.touched" class="error-texto">El plan de tratamiento es obligatorio.</small>
     </div>
 

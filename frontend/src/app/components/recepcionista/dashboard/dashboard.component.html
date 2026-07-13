@@ -1,0 +1,36 @@
+<div class="recepcion-dashboard">
+ 
+  <section class="recepcion-header">
+    <div>
+      <h1>Bienvenida(o), {{ auth.perfil()?.nombres }} {{ auth.perfil()?.apellidos }}</h1>
+      <p>Panel de recepción</p>
+    </div>
+    <div class="recepcion-icon">🗓️</div>
+  </section>
+ 
+  <section class="tarjetas-recepcion">
+    <div class="tarjeta">
+      <h3>Citas de hoy</h3>
+      <p class="numero">{{ citasDeHoy }}</p>
+    </div>
+ 
+    <div class="tarjeta">
+      <h3>Total de citas</h3>
+      <p class="numero">{{ totalCitas }}</p>
+    </div>
+ 
+    <div class="tarjeta">
+      <h3>Pacientes registrados</h3>
+      <p class="numero">{{ totalPacientes }}</p>
+    </div>
+  </section>
+ 
+  <section class="acciones-recepcion">
+    <h2>Acciones rápidas</h2>
+    <div class="botones">
+      <a routerLink="/recepcionista/nueva-cita">Agendar Nueva Cita</a>
+      <a routerLink="/recepcionista/nuevo-paciente">Registrar Nuevo Paciente</a>
+    </div>
+  </section>
+ 
+</div>

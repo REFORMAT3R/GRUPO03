@@ -1,108 +1,46 @@
 <div class="doctor-dashboard">
-
+ 
     <section class="doctor-header">
-
+ 
         <div>
-
-            <h1>
-                Bienvenido Dr. {{perfil?.nombres}} {{perfil?.apellidos}}
-            </h1>
-
-
-            <p>
-                Panel médico personal
-            </p>
-
+            <h1>Bienvenido Dr. {{perfil?.nombres}} {{perfil?.apellidos}}</h1>
+            <p>Panel médico personal</p>
         </div>
-
-        <div class="doctor-icon">
-
-            🩺
-
-        </div>
-
-
+ 
+        <div class="doctor-icon">🩺</div>
+ 
     </section>
-
+ 
     <section class="tarjetas-medicas">
-
-
+ 
         <div class="tarjeta">
-
-            <h3>
-                Mis citas
-            </h3>
-
-            <p class="numero">
-                0
-            </p>
-
-            <span>
-                Citas pendientes
-            </span>
-
+            <h3>Mis citas</h3>
+            <p class="numero">{{ citasPendientes }}</p>
+            <span>Citas pendientes</span>
         </div>
-
+ 
         <div class="tarjeta">
-
-            <h3>
-                Consultas realizadas
-            </h3>
-
-            <p class="numero">
-                0
-            </p>
-
-            <span>
-                Historial médico
-            </span>
-
+            <h3>Consultas realizadas</h3>
+            <p class="numero">{{ consultasRealizadas }}</p>
+            <span>Historial médico</span>
         </div>
-
+ 
         <div class="tarjeta">
-
-            <h3>
-                Pacientes atendidos
-            </h3>
-
-            <p class="numero">
-                0
-            </p>
-
-            <span>
-                Total registrados
-            </span>
-
+            <h3>Pacientes atendidos</h3>
+            <p class="numero">{{ pacientesAtendidos }}</p>
+            <span>Total registrados</span>
         </div>
-
-
-
+ 
     </section>
-
+ 
     <section class="acciones-doctor">
-
-
-        <h2>
-            Acciones rápidas
-        </h2>
-
-
+ 
+        <h2>Acciones rápidas</h2>
+ 
         <div class="botones">
-
-
-            <a routerLink="/doctor/mis-citas">
-
-                Ver mis citas
-
-            </a>
-
-            <a routerLink="/doctor/registrar-consulta">
-
-                Registrar consulta
-
-            </a>
-
-
+            <a routerLink="/doctor/mis-citas">Ver mis citas</a>
+            <a routerLink="/doctor/registrar-consulta">Registrar consulta</a>
         </div>
+ 
     </section>
 </div>

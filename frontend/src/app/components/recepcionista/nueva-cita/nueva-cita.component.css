@@ -1,0 +1,54 @@
+.contenedor-formulario {
+  max-width: 500px;
+  margin: 30px auto;
+}
+ 
+.cuerpo-formulario {
+  padding: 20px;
+}
+ 
+.campo-grupo {
+  margin-bottom: 15px;
+}
+ 
+.campo-grupo label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+ 
+.campo-grupo input,
+.campo-grupo select,
+.campo-grupo textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+ 
+.error-texto {
+  color: #e74c3c;
+  display: block;
+  margin-top: 5px;
+  font-size: 13px;
+}
+ 
+.btn-guardar {
+  width: 100%;
+  padding: 12px;
+  background-color: #2ecc71;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+ 
+.btn-guardar:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}

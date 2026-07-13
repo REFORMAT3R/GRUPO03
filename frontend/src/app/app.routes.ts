@@ -23,6 +23,13 @@ import { FormularioPersonalComponent } from './components/admin/personal/formula
 
 import { DoctorLayoutComponent } from './components/doctor/doctor-layout/doctor-layout.component';
 import { DoctorDashboardComponent } from './components/doctor/dashboard/dashboard.component';
+import { MisCitasComponent } from './components/doctor/mis-citas/mis-citas.component';
+import { RegistrarConsultasComponent } from './components/doctor/registrar-consulta/registrar-consultas.component';
+ 
+import { RecepcionistaLayoutComponent } from './components/recepcionista/recepcionista-layout/recepcionista-layout.component';
+import { RecepcionistaDashboardComponent } from './components/recepcionista/dashboard/dashboard.component';
+import { NuevaCitaComponent } from './components/recepcionista/nueva-cita/nueva-cita.component';
+import { NuevoPacienteComponent } from './components/recepcionista/nuevo-paciente/nuevo-paciente.component';
 
 import { authGuard } from './core/auth.guard';
 import { rolGuard } from './core/rol.guard';
@@ -151,24 +158,70 @@ export const routes: Routes = [
     roles:['DOCTOR']
   },
   children:[
-
+ 
     {
       path:'dashboard',
       component:DoctorDashboardComponent
     },
-
+ 
+    {
+      path:'mis-citas',
+      component:MisCitasComponent
+    },
+ 
+    {
+      path:'registrar-consulta',
+      component:RegistrarConsultasComponent
+    },
+ 
     {
       path:'',
       redirectTo:'dashboard',
       pathMatch:'full'
     }
-
+ 
   ]
 },
-
+ 
+{
+  path:'recepcionista',
+  component:RecepcionistaLayoutComponent,
+  canActivate:[
+    authGuard,
+    rolGuard
+  ],
+  data:{
+    roles:['RECEPCION']
+  },
+  children:[
+ 
+    {
+      path:'dashboard',
+      component:RecepcionistaDashboardComponent
+    },
+ 
+    {
+      path:'nueva-cita',
+      component:NuevaCitaComponent
+    },
+ 
+    {
+      path:'nuevo-paciente',
+      component:NuevoPacienteComponent
+    },
+ 
+    {
+      path:'',
+      redirectTo:'dashboard',
+      pathMatch:'full'
+    }
+ 
+  ]
+},
+ 
 {
   path:'**',
   redirectTo:'login'
 }
-
+ 
 ];
