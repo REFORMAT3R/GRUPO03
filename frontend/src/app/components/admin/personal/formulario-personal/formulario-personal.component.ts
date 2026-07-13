@@ -17,14 +17,12 @@ export class FormularioPersonalComponent implements OnInit {
   personal: any = {
     username: '',
     password: '',
-    email: '',
     nombres: '',
     apellidos: '',
     rol: '',
     telefono: ''
   };
 
-  // Control de edición
   esEdicion: boolean = false;
   idPersonal: number | null = null;
 
@@ -56,55 +54,48 @@ export class FormularioPersonalComponent implements OnInit {
 
   guardarPersonal() {
 
-    // ==========================
     // EDITAR
-    // ==========================
     if (this.esEdicion && this.idPersonal) {
 
-      const datosActualizar = {
-        username: this.personal.username,
-        email: this.personal.email,
-        nombres: this.personal.nombres,
-        apellidos: this.personal.apellidos,
-        rol: this.personal.rol,
-        telefono: this.personal.telefono
-      };
-
-      this.personalService.actualizarPersonal(
-        this.idPersonal,
-        datosActualizar as any
-      ).subscribe({
-
-        next: () => {
-          alert('Personal actualizado correctamente');
-          this.reset();
-        },
-
-        error: (err) => {
-          alert('Error al actualizar el personal');
-          console.error(err);
-        }
-
-      });
-
-    }
-
-    // ==========================
-    // CREAR
-    // ==========================
-    else {
-
-      this.personalService.registrarPersonal(this.personal)
+      this.personalService.actualizarPersonal(this.idPersonal, this.personal)
         .subscribe({
 
           next: () => {
-            alert('Personal registrado correctamente');
+
+            alert('Personal actualizado correctamente');
             this.reset();
+
           },
 
           error: (err) => {
+
+            alert('Error al actualizar el personal');
+            console.error(err);
+
+          }
+
+        });
+
+    }
+
+    // CREAR
+    else {
+
+      this.personalService.crearPersonal(this.personal)
+        .subscribe({
+
+          next: () => {
+
+            alert('Personal registrado correctamente');
+            this.reset();
+
+          },
+
+          error: (err) => {
+
             alert('Error al registrar el personal');
             console.error(err);
+
           }
 
         });
@@ -130,7 +121,6 @@ export class FormularioPersonalComponent implements OnInit {
     this.personal = {
       username: '',
       password: '',
-      email: '',
       nombres: '',
       apellidos: '',
       rol: '',

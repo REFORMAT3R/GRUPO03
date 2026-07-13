@@ -1,0 +1,131 @@
+<div class="tarjeta-clinica contenedor-formulario">
+  <div class="cabecera-tabla">
+    <h3>{{ esEdicion ? 'Editar Personal' : 'Registrar Personal' }}</h3>
+    <a class="btn btn-eliminar" routerLink="/personal">Cancelar</a>
+  </div>
+
+  <form #formPersonal="ngForm"
+        (ngSubmit)="formPersonal.valid && guardarPersonal()"
+        class="cuerpo-formulario">
+
+    <!-- Usuario -->
+    <div class="campo-grupo">
+      <label>Usuario:</label>
+      <input
+        type="text"
+        [(ngModel)]="personal.username"
+        name="username"
+        required
+        minlength="4"
+        maxlength="30"
+        #user="ngModel">
+
+      <small *ngIf="user.invalid && user.touched" class="error-texto">
+        El usuario debe tener entre 4 y 30 caracteres.
+      </small>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="campo-grupo" *ngIf="!esEdicion">
+      <label>Contraseña:</label>
+
+      <input
+        type="password"
+        [(ngModel)]="personal.password"
+        name="password"
+        required
+        minlength="8"
+        #pass="ngModel">
+
+      <small *ngIf="pass.invalid && pass.touched" class="error-texto">
+        La contraseña debe tener mínimo 8 caracteres.
+      </small>
+    </div>
+
+    <!-- Nombres -->
+    <div class="campo-grupo">
+      <label>Nombres:</label>
+
+      <input
+        type="text"
+        [(ngModel)]="personal.nombres"
+        name="nombres"
+        required
+        minlength="2"
+        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*"
+        #nom="ngModel">
+
+      <small *ngIf="nom.invalid && nom.touched" class="error-texto">
+        Solo se permiten letras y mínimo 2 caracteres.
+      </small>
+    </div>
+
+    <!-- Apellidos -->
+    <div class="campo-grupo">
+      <label>Apellidos:</label>
+
+      <input
+        type="text"
+        [(ngModel)]="personal.apellidos"
+        name="apellidos"
+        required
+        minlength="2"
+        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*"
+        #ape="ngModel">
+
+      <small *ngIf="ape.invalid && ape.touched" class="error-texto">
+        Solo se permiten letras y mínimo 2 caracteres.
+      </small>
+    </div>
+
+    <!-- Rol -->
+    <div class="campo-grupo">
+      <label>Rol:</label>
+
+      <select
+        [(ngModel)]="personal.rol"
+        name="rol"
+        required
+        #rol="ngModel">
+
+        <option value="" disabled>Seleccione...</option>
+        <option value="ADMIN">Administrador</option>
+        <option value="RECEPCION">Recepción</option>
+
+      </select>
+
+      <small *ngIf="rol.invalid && rol.touched" class="error-texto">
+        Debe seleccionar un rol.
+      </small>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="campo-grupo">
+      <label>Teléfono:</label>
+
+      <input
+        type="text"
+        [(ngModel)]="personal.telefono"
+        name="telefono"
+        required
+        minlength="9"
+        maxlength="9"
+        pattern="9[0-9]*"
+        #tel="ngModel">
+
+      <small *ngIf="tel.invalid && tel.touched" class="error-texto">
+        Debe empezar con 9 y tener 9 dígitos.
+      </small>
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="formPersonal.invalid"
+      class="btn btn-guardar">
+
+      {{ esEdicion ? 'Guardar Cambios' : 'Registrar Personal' }}
+
+    </button>
+
+  </form>
+</div>
