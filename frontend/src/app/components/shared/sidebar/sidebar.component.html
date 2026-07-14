@@ -1,0 +1,9 @@
+<aside class="sidebar-clinica">
+  <ul class="sidebar-lista">
+    <li *ngFor="let enlace of enlaces">
+      <a [routerLink]="enlace.ruta" routerLinkActive="sidebar-activo" [routerLinkActiveOptions]="{ exact: false }">
+        {{ enlace.etiqueta }}
+      </a>
+    </li>
+  </ul>
+</aside>

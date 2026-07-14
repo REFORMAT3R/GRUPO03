@@ -1,0 +1,16 @@
+.admin-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+ 
+.admin-cuerpo {
+  display: flex;
+  flex: 1;
+}
+ 
+.admin-contenido {
+  flex: 1;
+  padding: 24px;
+  background-color: #f4f6f9;
+}

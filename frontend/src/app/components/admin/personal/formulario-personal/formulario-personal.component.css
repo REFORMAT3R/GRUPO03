@@ -1,0 +1,113 @@
+/* Contenedor principal */
+.tarjeta-clinica {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  margin: 20px auto;
+  max-width: 600px;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Cabecera para Personal */
+.cabecera-azul {
+  background-color: #5a1b84 !important; 
+  color: #ffffff;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cabecera-azul h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* Formulario */
+.cuerpo-formulario {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Campos */
+.campo-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo-grupo label {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.campo-grupo input,
+.campo-grupo select {
+  padding: 10px 12px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.campo-grupo input:focus,
+.campo-grupo select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.25);
+}
+
+/* Errores */
+.error-texto {
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+/* Botones */
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+}
+
+.btn-eliminar {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.btn-eliminar:hover {
+  background: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-guardar {
+  background: #3498db;
+  color: #ffffff;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.btn-guardar:hover:not(:disabled) {
+  background: #2980b9;
+}
+
+.btn-guardar:disabled {
+  background: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}

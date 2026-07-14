@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Paciente(models.Model):
@@ -68,6 +69,14 @@ class Doctor(models.Model):
         ('MEDICINA_INTERNA', 'Medicina Interna'),
     ]
 
+    usuario = models.OneToOneField(
+        User,
+        on_delete= models.CASCADE,
+        related_name='doctor',
+        null=True,
+        blank=True
+    )
+
     texto_validator = RegexValidator(
         regex=r'^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$',
         message="Solo se permiten letras y espacios."
@@ -96,6 +105,45 @@ class Doctor(models.Model):
 
     def __str__(self):
         return f"Dr(a). {self.nombres} {self.apellidos}"
+    
+class Personal(models.Model):
+    ROL_CHOICES = [
+        ('RECEPCION', 'Recepción'),
+        ('ADMIN', 'Administrador')
+    ]
+
+    usuario = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='personal_perfil'
+    )
+
+    texto_validator = RegexValidator(
+        regex=r'^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$',
+        message="Solo se permiten letras y espacios."
+    )
+
+    nombres = models.CharField(
+        max_length=100,
+        validators=[texto_validator]
+    )
+    apellidos = models.CharField(
+        max_length=100,
+        validators=[texto_validator]
+    )
+    rol = models.CharField(max_length=15, choices=ROL_CHOICES)
+
+    telefono_validator = RegexValidator(
+        regex=r'^9\d{8}$',
+        message="El teléfono debe empezar con 9 y tener exactamente 9 dígitos."
+    )
+    telefono = models.CharField(
+        max_length=9,
+        validators=[telefono_validator]
+    )
+
+    def __str__(self):
+        return f"{self.get_rol_display()}: {self.nombres} {self.apellidos}"
 
 
 class Cita(models.Model):
@@ -140,9 +188,23 @@ class Consulta(models.Model):
 
     diagnostico = models.TextField()
     tratamiento = models.TextField()
-    medicamentos = models.TextField()
     observaciones = models.TextField(blank=True)
     fecha_consulta = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Consulta #{self.id}"
+
+class Receta(models.Model):
+    consulta = models.OneToOneField(
+        Consulta,
+        on_delete=models.CASCADE,
+        related_name='receta'
+    )
+    medicamento = models.CharField(max_length=200)
+    dosis = models.CharField(max_length=100)
+    frecuencia = models.CharField(max_length=100)
+    duracion = models.CharField(max_length=100)
+    indicaciones = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.medicamento} - {self.dosis}"

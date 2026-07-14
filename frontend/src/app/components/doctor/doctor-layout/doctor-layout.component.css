@@ -1,0 +1,31 @@
+.layout {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background-color: #f5f6fa;
+
+}
+
+
+.contenido-principal {
+
+    flex: 1;
+
+    display: flex;
+
+}
+
+
+.pagina {
+
+    flex: 1;
+
+    padding: 25px;
+
+    overflow-y: auto;
+
+}

@@ -1,0 +1,37 @@
+<div class="tarjeta-clinica">
+  <div class="cabecera-tabla cabecera-verde">
+    <h3>Agenda de Citas Médicas - Moisés Heresi</h3>
+    <a class="btn btn-nuevo" routerLink="/admin/citas/nuevo">+ Agendar Cita</a>
+  </div>
+  
+  <table class="tabla-datos">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Paciente (ID)</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Motivo / Especialidad</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of citas">
+        <td>{{ c.id }}</td>
+        <td class="texto-negrita">{{ c.paciente }}</td>
+        <td>{{ c.fecha }}</td>
+        <td>{{ c.hora }}</td>
+        <td>{{ c.motivo || 'Consulta General' }}</td>
+        <td>
+          <button class="btn btn-editar" (click)="editarCita(c)">Editar</button>
+          <button class="btn btn-eliminar" (click)="eliminarCita(c.id!)">Cancelar</button>
+        </td>
+      </tr>
+      <tr *ngIf="citas.length === 0">
+        <td colspan="5" class="tabla-vacia">
+          No hay citas médicas programadas en el sistema.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

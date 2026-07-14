@@ -1,0 +1,49 @@
+<div class="tarjeta-clinica contenedor-formulario">
+  <div class="cabecera-tabla">
+    <h3>Agendar Nueva Cita</h3>
+    <a class="btn btn-eliminar" routerLink="/recepcionista">Cancelar</a>
+  </div>
+ 
+  <form #formCita="ngForm" (ngSubmit)="formCita.valid && guardarCita()" class="cuerpo-formulario">
+ 
+    <div class="campo-grupo">
+      <label>Paciente:</label>
+      <select [(ngModel)]="cita.paciente" name="paciente" required #pac="ngModel">
+        <option value="" disabled selected>Seleccione un paciente...</option>
+        <option *ngFor="let p of pacientes" [value]="p.id">{{ p.nombres }} {{ p.apellidos }} — DNI {{ p.dni }}</option>
+      </select>
+      <small *ngIf="pac.invalid && pac.touched" class="error-texto">Debe seleccionar un paciente.</small>
+    </div>
+ 
+    <div class="campo-grupo">
+      <label>Doctor:</label>
+      <select [(ngModel)]="cita.doctor" name="doctor" required #doc="ngModel">
+        <option value="" disabled selected>Seleccione un doctor...</option>
+        <option *ngFor="let d of doctores" [value]="d.id">{{ d.nombres }} {{ d.apellidos }} — {{ d.especialidad }}</option>
+      </select>
+      <small *ngIf="doc.invalid && doc.touched" class="error-texto">Debe seleccionar un doctor.</small>
+    </div>
+ 
+    <div class="campo-grupo">
+      <label>Fecha:</label>
+      <input type="date" [(ngModel)]="cita.fecha" name="fecha" required [min]="fechaMinima" #fec="ngModel">
+      <small *ngIf="fec.invalid && fec.touched" class="error-texto">La fecha es obligatoria y no puede ser en el pasado.</small>
+    </div>
+ 
+    <div class="campo-grupo">
+      <label>Hora:</label>
+      <input type="time" [(ngModel)]="cita.hora" name="hora" required #hor="ngModel">
+      <small *ngIf="hor.invalid && hor.touched" class="error-texto">La hora es obligatoria.</small>
+    </div>
+ 
+    <div class="campo-grupo">
+      <label>Motivo:</label>
+      <textarea [(ngModel)]="cita.motivo" name="motivo" rows="2" placeholder="Motivo de la consulta (opcional)"></textarea>
+    </div>
+ 
+    <button type="submit" [disabled]="formCita.invalid" class="btn btn-guardar">
+      Agendar Cita
+    </button>
+ 
+  </form>
+</div>

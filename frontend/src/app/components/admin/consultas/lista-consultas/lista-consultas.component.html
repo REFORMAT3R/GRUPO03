@@ -1,0 +1,37 @@
+<div class="tarjeta-clinica">
+  <div class="cabecera-tabla cabecera-morada">
+    <h3>Historial de Consultas Médicas Atendidas</h3>
+    <a class="btn btn-nuevo" routerLink="/admin/consultas/nuevo">+ Crear Consulta</a>
+  </div>
+  
+  <table class="tabla-datos">
+    <thead>
+      <tr>
+        <th>ID Consulta</th>
+        <th>ID Cita</th>
+        <th>Diagnóstico</th>
+        <th>Tratamiento</th>
+        <th>Medicamentos</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of consultas">
+        <td>{{ c.id }}</td>
+        <td class="texto-negrita">Cita #{{ c.cita }}</td>
+        <td>{{ c.diagnostico }}</td>
+        <td>{{ c.tratamiento }}</td>
+        <td>{{ c.medicamentos }}</td>
+        <td>
+          <button class="btn btn-editar" (click)="editarConsulta(c)">Editar</button>
+          <button class="btn btn-eliminar" (click)="eliminarConsulta(c.id)">Eliminar</button>
+        </td>
+      </tr>
+      <tr *ngIf="consultas.length === 0">
+        <td colspan="6" class="tabla-vacia">
+          No se han registrado hojas de consulta todavía.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

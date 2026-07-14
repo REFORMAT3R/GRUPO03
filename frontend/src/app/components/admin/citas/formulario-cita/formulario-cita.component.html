@@ -1,0 +1,92 @@
+<div class="tarjeta-clinica contenedor-formulario">
+  <div class="cabecera-tabla cabecera-verde">
+    <h3>{{ esEdicion ? 'Reprogramar Cita' : 'Agendar Nueva Cita' }}</h3>
+    <a class="btn btn-eliminar" routerLink="/admin/citas">Cancelar</a>
+  </div>
+
+  <form #formCita="ngForm" class="cuerpo-formulario">
+    
+    <div class="campo-grupo">
+      <label>Paciente:</label>
+
+      <select
+        [(ngModel)]="cita.paciente"
+        name="paciente"
+        required
+        #pac="ngModel">
+
+        <option value="" disabled selected>Seleccione paciente</option>
+
+        <option *ngFor="let p of pacientes" [value]="p.id">
+          {{ p.nombres }} {{ p.apellidos }}
+        </option>
+
+      </select>
+
+      <small *ngIf="pac.invalid && pac.touched" class="error-texto">
+        Debe seleccionar un paciente.
+      </small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Doctor:</label>
+
+      <select
+        [(ngModel)]="cita.doctor"
+        name="doctor"
+        required
+        #doc="ngModel">
+
+        <option value="" disabled selected>Seleccione doctor</option>
+
+        <option *ngFor="let d of doctores" [value]="d.id">
+          Dr. {{ d.nombres }} {{ d.apellidos }}
+        </option>
+
+      </select>
+
+      <small *ngIf="doc.invalid && doc.touched" class="error-texto">
+        Debe seleccionar un doctor.
+      </small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Fecha de la Cita:</label>
+      <input
+        type="date"
+        [(ngModel)]="cita.fecha"
+        name="fecha"
+        required
+        [min]="fechaMinima"
+        (change)="onFechaChange()"
+        #fec="ngModel">
+      <small *ngIf="fec.invalid && fec.touched" class="error-texto">
+        {{ fec.errors?.['required'] ? 'La fecha es obligatoria.' : 'No se permiten fechas pasadas.' }}
+      </small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Hora de la Cita:</label>
+      <input
+        type="time"
+        [(ngModel)]="cita.hora"
+        name="hora"
+        required
+        [min]="horaMinima"
+        max="18:00"
+        #hor="ngModel">
+      <small *ngIf="hor.invalid && hor.touched" class="error-texto">La hora de la cita es obligatoria.</small>
+    </div>
+
+    <div class="campo-grupo">
+      <label>Motivo / Síntomas:</label>
+      <textarea [(ngModel)]="cita.motivo" name="motivo" required #mot="ngModel" rows="3"></textarea>
+      <small *ngIf="mot.invalid && mot.touched" class="error-texto">El motivo de la consulta es obligatorio.</small>
+    </div>
+
+    <button type="button" (click)="guardarCita()" class="btn btn-guardar">
+      {{ esEdicion ? 'Actualizar Cita' : 'Confirmar Cita Médica' }}
+    </button>
+
+  </form>
+</div>

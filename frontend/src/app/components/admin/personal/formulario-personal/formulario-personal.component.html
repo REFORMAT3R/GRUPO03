@@ -1,0 +1,216 @@
+```html
+<div class="tarjeta-clinica contenedor-formulario">
+
+  <div class="cabecera-tabla cabecera-azul">
+
+    <h3>
+      {{ esEdicion ? 'Editar Personal' : 'Registrar Personal' }}
+    </h3>
+
+    <a
+      class="btn btn-eliminar"
+      routerLink="/admin/personal">
+
+      Cancelar
+
+    </a>
+
+  </div>
+
+
+  <form
+    #formPersonal="ngForm"
+    (ngSubmit)="formPersonal.valid && guardarPersonal()"
+    class="cuerpo-formulario">
+
+    <div class="campo-grupo">
+
+      <label>Nombres:</label>
+
+      <input
+        type="text"
+        [(ngModel)]="personal.nombres"
+        name="nombres"
+        required
+        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*"
+        #nom="ngModel">
+
+      <small
+        *ngIf="nom.invalid && nom.touched"
+        class="error-texto">
+
+        {{ nom.errors?.['required']
+          ? 'El nombre es obligatorio.'
+          : 'Solo se permiten letras.' }}
+
+      </small>
+
+    </div>
+
+
+    <div class="campo-grupo">
+
+      <label>Apellidos:</label>
+
+      <input
+        type="text"
+        [(ngModel)]="personal.apellidos"
+        name="apellidos"
+        required
+        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]*"
+        #ape="ngModel">
+
+      <small
+        *ngIf="ape.invalid && ape.touched"
+        class="error-texto">
+
+        {{ ape.errors?.['required']
+          ? 'El apellido es obligatorio.'
+          : 'Solo se permiten letras.' }}
+
+      </small>
+
+    </div>
+
+
+    <div class="campo-grupo">
+
+      <label>Nombre de usuario:</label>
+
+      <input
+        type="text"
+        [(ngModel)]="personal.username"
+        name="username"
+        required
+        #user="ngModel">
+
+      <small
+        *ngIf="user.invalid && user.touched"
+        class="error-texto">
+
+        El usuario es obligatorio.
+
+      </small>
+
+    </div>
+
+
+    <div class="campo-grupo">
+
+      <label>Correo Electrónico:</label>
+
+      <input
+        type="email"
+        [(ngModel)]="personal.email"
+        name="email"
+        required
+        email
+        #em="ngModel">
+
+      <small
+        *ngIf="em.invalid && em.touched"
+        class="error-texto">
+
+        Ingrese un correo electrónico válido.
+
+      </small>
+
+    </div>
+
+
+    <div class="campo-grupo">
+
+      <label>Contraseña:</label>
+
+      <input
+        type="password"
+        [(ngModel)]="personal.password"
+        name="password"
+        required
+        minlength="8"
+        #pass="ngModel">
+
+      <small
+        *ngIf="pass.invalid && pass.touched"
+        class="error-texto">
+
+        La contraseña debe tener al menos 8 caracteres.
+
+      </small>
+
+    </div>
+
+
+    <div class="campo-grupo">
+
+      <label>Teléfono:</label>
+
+      <input
+        type="text"
+        [(ngModel)]="personal.telefono"
+        name="telefono"
+        required
+        minlength="9"
+        maxlength="9"
+        pattern="9[0-9]*"
+        #tel="ngModel">
+
+      <small
+        *ngIf="tel.invalid && tel.touched"
+        class="error-texto">
+
+        Debe empezar con 9 y tener 9 dígitos.
+
+      </small>
+
+    </div>
+
+
+    <div class="campo-grupo">
+
+      <label>Rol:</label>
+
+      <select
+        [(ngModel)]="personal.rol"
+        name="rol"
+        required
+        #rol="ngModel">
+
+        <option value="" disabled>
+          Seleccione un rol...
+        </option>
+
+        <option value="ADMIN">
+          Administrador
+        </option>
+
+        <option value="RECEPCION">
+          Recepcionista
+        </option>
+
+      </select>
+
+      <small
+        *ngIf="rol.invalid && rol.touched"
+        class="error-texto">
+
+        Debe seleccionar un rol.
+
+      </small>
+
+    </div>
+
+
+    <button
+      type="submit"
+      [disabled]="formPersonal.invalid"
+      class="btn btn-guardar">
+
+      {{ esEdicion ? 'Guardar Cambios' : 'Registrar Personal' }}
+
+    </button>
+
+  </form>
+
+</div>
+```

@@ -1,0 +1,91 @@
+<div class="tarjeta-clinica">
+
+  <div class="cabecera-tabla">
+
+    <h3>Mis Consultas</h3>
+
+  </div>
+
+  <table class="tabla-datos">
+
+    <thead>
+
+      <tr>
+
+        <th>Diagnóstico</th>
+
+        <th>Tratamiento</th>
+
+        <th>Observaciones</th>
+
+        <th>Fecha</th>
+
+        <th class="acciones-columna">Acciones</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let c of consultas">
+
+        <td class="texto-negrita">
+          {{c.diagnostico}}
+        </td>
+
+        <td>
+          {{c.tratamiento}}
+        </td>
+
+        <td>
+          {{c.observaciones || 'Sin observaciones'}}
+        </td>
+
+        <td>
+          {{c.fecha_consulta | date:'dd/MM/yyyy'}}
+        </td>
+
+        <td>
+
+          <div class="acciones">
+
+            <button
+              class="btn btn-guardar"
+              (click)="verReceta(c)">
+              Ver receta
+            </button>
+
+            <button
+              class="btn btn-editar"
+              (click)="editarConsulta(c)">
+              Modificar
+            </button>
+
+            <button
+              class="btn btn-eliminar"
+              (click)="eliminarConsulta(c)">
+              Eliminar
+            </button>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+      <tr *ngIf="consultas.length===0">
+
+        <td colspan="5" class="tabla-vacia">
+
+          No tienes consultas registradas.
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>

@@ -1,0 +1,127 @@
+.dashboard {
+
+  padding: 30px;
+
+}
+
+
+.cabecera {
+
+  margin-bottom: 30px;
+
+}
+
+
+.cabecera h1 {
+
+  font-size: 32px;
+  color: #2c3e50;
+  margin-bottom: 8px;
+
+}
+
+
+.cabecera p {
+
+  color: #777;
+  font-size: 16px;
+
+}
+
+
+
+.tarjetas {
+
+  display: grid;
+
+  grid-template-columns:
+  repeat(auto-fit, minmax(240px, 1fr));
+
+  gap: 25px;
+
+}
+
+
+
+.tarjeta {
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 25px;
+
+  box-shadow:
+  0 4px 12px rgba(0,0,0,0.1);
+
+  transition: 0.3s;
+
+}
+
+
+
+.tarjeta:hover {
+
+  transform: translateY(-5px);
+
+}
+
+
+
+.icono {
+
+  font-size: 40px;
+
+  margin-bottom: 15px;
+
+}
+
+
+
+.tarjeta h3 {
+
+  color: #34495e;
+
+  margin-bottom: 10px;
+
+}
+
+
+
+.tarjeta p {
+
+  color: #666;
+
+  min-height: 45px;
+
+}
+
+
+
+.boton {
+
+  display: inline-block;
+
+  margin-top: 15px;
+
+  padding: 10px 18px;
+
+  background-color: #3498db;
+
+  color:white;
+
+  text-decoration:none;
+
+  border-radius:6px;
+
+  font-weight:bold;
+
+}
+
+
+
+.boton:hover {
+
+  background-color:#2980b9;
+
+}

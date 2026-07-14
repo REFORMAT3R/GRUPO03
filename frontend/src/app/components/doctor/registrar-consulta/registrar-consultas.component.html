@@ -1,0 +1,116 @@
+<div class="tarjeta-clinica contenedor-formulario">
+
+  <div class="cabecera-tabla">
+    <h3>
+
+    {{modoEdicion ? 'Modificar Consulta' : 'Registrar Consulta'}}
+
+    </h3>
+
+    <a 
+      class="btn btn-eliminar"
+      routerLink="/doctor/consultas">
+      Cancelar
+    </a>
+
+  </div>
+
+  <form 
+    #formConsulta="ngForm"
+    (ngSubmit)="formConsulta.valid && guardarConsulta()"
+    class="cuerpo-formulario">
+
+
+    <p *ngIf="!modoEdicion && citaSeleccionada" class="info-cita">
+      Cita #{{citaSeleccionada.id}} — {{citaSeleccionada.fecha}} {{citaSeleccionada.hora}}
+    </p>
+
+    <p *ngIf="!modoEdicion && !citaSeleccionada" class="error-texto">
+      No se seleccionó ninguna cita. Regresa a Mis Citas y selecciona una.
+    </p>
+
+    <p *ngIf="modoEdicion" class="info-cita">
+      Modificando una consulta existente.
+    </p>
+
+    <div class="campo-grupo">
+
+      <label>
+        Diagnóstico:
+      </label>
+
+      <textarea
+
+        [(ngModel)]="consulta.diagnostico"
+        name="diagnostico"
+        required
+        rows="4"
+        #diag="ngModel">
+
+      </textarea>
+
+      <small 
+        *ngIf="diag.invalid && diag.touched"
+        class="error-texto">
+
+        El diagnóstico es obligatorio.
+
+      </small>
+
+
+    </div>
+
+    <div class="campo-grupo">
+
+      <label>
+        Plan de tratamiento:
+      </label>
+
+      <textarea
+
+        [(ngModel)]="consulta.tratamiento"
+        name="tratamiento"
+        required
+        rows="4"
+        #trat="ngModel">
+
+      </textarea>
+
+      <small
+        *ngIf="trat.invalid && trat.touched"
+        class="error-texto">
+
+        El tratamiento es obligatorio.
+
+      </small>
+
+    </div>
+
+    <div class="campo-grupo">
+
+      <label>
+        Observaciones:
+      </label>
+
+      <textarea
+
+        [(ngModel)]="consulta.observaciones"
+        name="observaciones"
+        rows="3">
+
+      </textarea>
+
+    </div>
+
+    <button
+    type="submit"
+    [disabled]="formConsulta.invalid || (!modoEdicion && !citaSeleccionada)"
+    class="btn btn-guardar">
+
+    {{modoEdicion ? 'Actualizar Consulta' : 'Guardar Consulta'}}
+
+    </button>
+
+  </form>
+
+</div>

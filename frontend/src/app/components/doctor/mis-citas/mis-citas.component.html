@@ -1,0 +1,33 @@
+<div class="tarjeta-clinica">
+  <div class="cabecera-tabla">
+    <h3>Mis Citas</h3>
+  </div>
+ 
+  <table class="tabla-datos">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Paciente</th>
+        <th>Motivo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of citas">
+        <td>{{ c.fecha }}</td>
+        <td>{{ c.hora }}</td>
+        <td class="texto-negrita">{{ nombrePaciente(c.paciente) }}</td>
+        <td>{{ c.motivo || 'Consulta General' }}</td>
+        <td>
+          <button class="btn btn-guardar" (click)="registrarConsulta(c)">Registrar Consulta</button>
+        </td>
+      </tr>
+      <tr *ngIf="citas.length === 0">
+        <td colspan="5" class="tabla-vacia">
+          No tienes citas asignadas por el momento.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
