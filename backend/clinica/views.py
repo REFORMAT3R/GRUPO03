@@ -26,7 +26,9 @@ from .serializers import (
 from .permissions import (
     EsAdmin,
     EsAdminORecepcion,
-    EsDoctorDeLaConsulta
+    EsDoctorDeLaConsulta,
+    EsAdminORecepcionODoctor,
+    EsDoctorDeLaReceta
 )
 
 
@@ -52,7 +54,14 @@ class DoctorViewSet(viewsets.ModelViewSet):
         EsAdminORecepcion
     ]
 
+class PersonalViewSet(viewsets.ModelViewSet):
 
+    queryset = Personal.objects.all()
+    serializer_class = PersonalSerializer
+
+    permission_classes = [
+        EsAdminORecepcion
+    ]
 
 class RegistrarDoctorView(APIView):
 
@@ -85,15 +94,10 @@ class RegistrarDoctorView(APIView):
 
 
 
-class PersonalViewSet(viewsets.ModelViewSet):
-
-    queryset = Personal.objects.all()
-    serializer_class = PersonalSerializer
-
-    # Solo administrador
-    permission_classes = [
-        EsAdmin
-    ]
+class PacienteViewSet(viewsets.ModelViewSet):
+    queryset = Paciente.objects.all()
+    serializer_class = PacienteSerializer
+    permission_classes = [EsAdminORecepcionODoctor]
 
 
 
@@ -132,11 +136,16 @@ class CitaViewSet(viewsets.ModelViewSet):
 
     queryset = Cita.objects.all()
     serializer_class = CitaSerializer
+    permission_classes = [EsAdminORecepcionODoctor]
 
-    # Recepción administra citas
-    permission_classes = [
-        EsAdminORecepcion
-    ]
+    def get_queryset(self):
+
+        user = self.request.user
+
+        if hasattr(user, 'doctor'):
+            return Cita.objects.filter(doctor=user.doctor)
+
+        return Cita.objects.all()
 
 
 
@@ -145,11 +154,26 @@ class ConsultaViewSet(viewsets.ModelViewSet):
     queryset = Consulta.objects.all()
     serializer_class = ConsultaSerializer
 
-    # Doctor trabaja consultas
     permission_classes = [
         EsDoctorDeLaConsulta
     ]
 
+    def get_queryset(self):
+
+        usuario = self.request.user
+
+        if (
+            hasattr(usuario,'personal_perfil') and
+            usuario.personal_perfil.rol == 'ADMIN'
+        ):
+            return Consulta.objects.all()
+
+        if hasattr(usuario,'doctor'):
+            return Consulta.objects.filter(
+                cita__doctor=usuario.doctor
+            )
+
+        return Consulta.objects.none()
 
 
 class RecetaViewSet(viewsets.ModelViewSet):
@@ -159,7 +183,7 @@ class RecetaViewSet(viewsets.ModelViewSet):
 
     # Doctor trabaja recetas
     permission_classes = [
-        EsDoctorDeLaConsulta
+        EsDoctorDeLaReceta
     ]
 
 class PerfilUsuarioView(APIView):

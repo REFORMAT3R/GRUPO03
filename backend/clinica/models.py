@@ -195,10 +195,10 @@ class Consulta(models.Model):
         return f"Consulta #{self.id}"
 
 class Receta(models.Model):
-    consulta = models.ForeignKey(
+    consulta = models.OneToOneField(
         Consulta,
         on_delete=models.CASCADE,
-        related_name='recetas'
+        related_name='receta'
     )
     medicamento = models.CharField(max_length=200)
     dosis = models.CharField(max_length=100)

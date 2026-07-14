@@ -2,9 +2,6 @@ from rest_framework import permissions
 
 
 class EsAdmin(permissions.BasePermission):
-    """
-    Solo usuarios Administradores
-    """
 
     def has_permission(self, request, view):
         return (
@@ -13,11 +10,8 @@ class EsAdmin(permissions.BasePermission):
             request.user.personal_perfil.rol == 'ADMIN'
         )
 
+
 class EsAdminORecepcion(permissions.BasePermission):
-    """
-    Administrador o Recepción
-    Usado para pacientes y doctores
-    """
 
     def has_permission(self, request, view):
         return (
@@ -30,36 +24,60 @@ class EsAdminORecepcion(permissions.BasePermission):
         )
 
 
-class EsDoctorDeLaConsulta(permissions.BasePermission):
-    """
-    El administrador puede hacer todo.
-    El doctor solo puede acceder a sus propias consultas.
-    """
+class EsAdminORecepcionODoctor(permissions.BasePermission):
 
     def has_permission(self, request, view):
 
         if not request.user.is_authenticated:
             return False
 
-        # Administrador
-        if (
-            hasattr(request.user, 'personal_perfil') and
-            request.user.personal_perfil.rol == 'ADMIN'
-        ):
+        if hasattr(request.user, 'personal_perfil') and request.user.personal_perfil.rol in [
+            'ADMIN',
+            'RECEPCION'
+        ]:
             return True
 
-        # Doctor
+        return hasattr(request.user, 'doctor')
+
+
+class EsDoctorDeLaConsulta(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+
+        if not request.user.is_authenticated:
+            return False
+
+        if hasattr(request.user, 'personal_perfil') and request.user.personal_perfil.rol == 'ADMIN':
+            return True
+
         return hasattr(request.user, 'doctor')
 
 
     def has_object_permission(self, request, view, obj):
 
-        # Administrador
-        if (
-            hasattr(request.user, 'personal_perfil') and
-            request.user.personal_perfil.rol == 'ADMIN'
-        ):
+        if hasattr(request.user, 'personal_perfil') and request.user.personal_perfil.rol == 'ADMIN':
             return True
 
-        # Doctor dueño de la consulta
         return obj.cita.doctor.usuario == request.user
+
+
+
+class EsDoctorDeLaReceta(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+
+        if not request.user.is_authenticated:
+            return False
+
+        if hasattr(request.user, 'personal_perfil') and request.user.personal_perfil.rol == 'ADMIN':
+            return True
+
+        return hasattr(request.user, 'doctor')
+
+
+    def has_object_permission(self, request, view, obj):
+
+        if hasattr(request.user, 'personal_perfil') and request.user.personal_perfil.rol == 'ADMIN':
+            return True
+
+        return obj.consulta.cita.doctor.usuario == request.user

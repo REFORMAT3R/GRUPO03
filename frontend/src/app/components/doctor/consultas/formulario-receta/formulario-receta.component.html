@@ -1,0 +1,211 @@
+<div class="tarjeta-clinica contenedor-formulario">
+
+  <div class="cabecera-tabla">
+
+    <h3>
+      {{modoEdicion ? 'Modificar Receta' : 'Registrar Receta'}}
+    </h3>
+
+    <a
+      class="btn btn-eliminar"
+      routerLink="/doctor/consultas">
+
+      Cancelar
+
+    </a>
+
+  </div>
+
+
+  <form
+    #formReceta="ngForm"
+    (ngSubmit)="formReceta.valid && guardarReceta()"
+    class="cuerpo-formulario">
+
+
+    <p *ngIf="modoEdicion" class="info-cita">
+
+      Modificando receta existente.
+
+    </p>
+
+
+    <p *ngIf="!modoEdicion && receta.consulta" class="info-cita">
+
+      Consulta #{{receta.consulta}}
+
+    </p>
+
+
+
+    <p
+      *ngIf="!modoEdicion && !receta.consulta"
+      class="error-texto">
+
+      No se seleccionó ninguna consulta.
+
+    </p>
+
+
+
+    <div class="campo-grupo">
+
+      <label>
+        Medicamento:
+      </label>
+
+      <input
+        type="text"
+        [(ngModel)]="receta.medicamento"
+        name="medicamento"
+        required
+        #med="ngModel">
+
+
+      <small
+        *ngIf="med.invalid && med.touched"
+        class="error-texto">
+
+        El medicamento es obligatorio.
+
+      </small>
+
+    </div>
+
+
+
+    <div class="campo-grupo">
+
+      <label>
+        Dosis:
+      </label>
+
+      <input
+        type="text"
+        [(ngModel)]="receta.dosis"
+        name="dosis"
+        required
+        #dosis="ngModel">
+
+
+      <small
+        *ngIf="dosis.invalid && dosis.touched"
+        class="error-texto">
+
+        La dosis es obligatoria.
+
+      </small>
+
+    </div>
+
+
+
+    <div class="campo-grupo">
+
+      <label>
+        Frecuencia:
+      </label>
+
+      <input
+        type="text"
+        [(ngModel)]="receta.frecuencia"
+        name="frecuencia"
+        required
+        #frecuencia="ngModel">
+
+
+      <small
+        *ngIf="frecuencia.invalid && frecuencia.touched"
+        class="error-texto">
+
+        La frecuencia es obligatoria.
+
+      </small>
+
+    </div>
+
+
+
+    <div class="campo-grupo">
+
+      <label>
+        Duración:
+      </label>
+
+      <input
+        type="text"
+        [(ngModel)]="receta.duracion"
+        name="duracion"
+        required
+        #duracion="ngModel">
+
+
+      <small
+        *ngIf="duracion.invalid && duracion.touched"
+        class="error-texto">
+
+        La duración es obligatoria.
+
+      </small>
+
+    </div>
+
+
+
+    <div class="campo-grupo">
+
+      <label>
+        Indicaciones:
+      </label>
+
+      <textarea
+
+        [(ngModel)]="receta.indicaciones"
+        name="indicaciones"
+        rows="4">
+
+      </textarea>
+
+    </div>
+
+
+
+    <div class="acciones-formulario">
+
+
+      <button
+
+        type="submit"
+
+        class="btn btn-guardar"
+
+        [disabled]="formReceta.invalid || (!modoEdicion && !receta.consulta)">
+
+        {{modoEdicion ? 'Actualizar Receta' : 'Guardar Receta'}}
+
+      </button>
+
+
+
+      <button
+
+        *ngIf="modoEdicion"
+
+        type="button"
+
+        class="btn btn-eliminar"
+
+        (click)="eliminarReceta()">
+
+        Eliminar Receta
+
+      </button>
+
+
+    </div>
+
+
+  </form>
+
+
+</div>

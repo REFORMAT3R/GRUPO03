@@ -31,6 +31,9 @@ import { RecepcionistaDashboardComponent } from './components/recepcionista/dash
 import { NuevaCitaComponent } from './components/recepcionista/nueva-cita/nueva-cita.component';
 import { NuevoPacienteComponent } from './components/recepcionista/nuevo-paciente/nuevo-paciente.component';
 
+import { ListaConsultasDoctorComponent } from './components/doctor/consultas/lista-consultas/lista-consultas.component';
+import { FormularioRecetaComponent } from './components/doctor/consultas/formulario-receta/formulario-receta.component';
+
 import { authGuard } from './core/auth.guard';
 import { rolGuard } from './core/rol.guard';
 
@@ -172,6 +175,21 @@ export const routes: Routes = [
     {
       path:'registrar-consulta',
       component:RegistrarConsultasComponent
+    },
+
+    {
+      path:'modificar-consulta',
+      component:RegistrarConsultasComponent
+    },
+
+    {
+      path:'consultas',
+      component:ListaConsultasDoctorComponent
+    },
+
+    {
+      path:'consultas/receta',
+      component:FormularioRecetaComponent
     },
  
     {

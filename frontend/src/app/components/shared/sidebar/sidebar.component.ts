@@ -30,7 +30,7 @@ export class SidebarComponent {
     DOCTOR: [
       { ruta: '/doctor/dashboard', etiqueta: 'Mi Panel' },
       { ruta: '/doctor/mis-citas', etiqueta: 'Mis Citas' },
-      { ruta: '/doctor/registrar-consulta', etiqueta: 'Registrar Consuta' }
+      { ruta: '/doctor/consultas', etiqueta: 'Mis Consultas' }
     ],
     RECEPCION: [
       { ruta: '/recepcionista/dashboard', etiqueta: 'Mi Panel' },

@@ -55,4 +55,25 @@ export class RecetaService {
   eliminarReceta(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}${id}/`);
   }
+
+  private consultaParaReceta:any=null;
+
+  setConsultaRecetaCrear(id:number){
+
+    this.consultaParaReceta=id;
+
+  }
+
+  getConsultaRecetaCrear(){
+
+    return this.consultaParaReceta;
+
+  }
+
+  limpiarConsultaRecetaCrear(){
+
+    this.consultaParaReceta=null;
+
+  }
 }
+

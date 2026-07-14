@@ -1,80 +1,116 @@
 <div class="tarjeta-clinica contenedor-formulario">
+
   <div class="cabecera-tabla">
-    <h3>Registrar Consulta</h3>
-    <a class="btn btn-eliminar" routerLink="/doctor/mis-citas">Cancelar</a>
+    <h3>
+
+    {{modoEdicion ? 'Modificar Consulta' : 'Registrar Consulta'}}
+
+    </h3>
+
+    <a 
+      class="btn btn-eliminar"
+      routerLink="/doctor/consultas">
+      Cancelar
+    </a>
+
   </div>
- 
-  <form #formConsulta="ngForm" (ngSubmit)="formConsulta.valid && guardarConsulta()" class="cuerpo-formulario">
- 
-    <p *ngIf="citaSeleccionada" class="info-cita">
-      Cita #{{ citaSeleccionada.id }} — {{ citaSeleccionada.fecha }} {{ citaSeleccionada.hora }}
+
+  <form 
+    #formConsulta="ngForm"
+    (ngSubmit)="formConsulta.valid && guardarConsulta()"
+    class="cuerpo-formulario">
+
+
+    <p *ngIf="!modoEdicion && citaSeleccionada" class="info-cita">
+      Cita #{{citaSeleccionada.id}} — {{citaSeleccionada.fecha}} {{citaSeleccionada.hora}}
     </p>
-    <p *ngIf="!citaSeleccionada" class="error-texto">
-      No se seleccionó ninguna cita. Vuelve a "Mis Citas" y elige una para registrar su consulta.
+
+    <p *ngIf="!modoEdicion && !citaSeleccionada" class="error-texto">
+      No se seleccionó ninguna cita. Regresa a Mis Citas y selecciona una.
     </p>
- 
+
+    <p *ngIf="modoEdicion" class="info-cita">
+      Modificando una consulta existente.
+    </p>
+
     <div class="campo-grupo">
-      <label>Diagnóstico:</label>
-      <textarea [(ngModel)]="consulta.diagnostico" name="diagnostico" required rows="3" #diag="ngModel"></textarea>
-      <small *ngIf="diag.invalid && diag.touched" class="error-texto">El diagnóstico es obligatorio.</small>
-    </div>
- 
-    <div class="campo-grupo">
-      <label>Plan de Tratamiento:</label>
-      <textarea [(ngModel)]="consulta.tratamiento" name="tratamiento" required rows="3" #trat="ngModel"></textarea>
-      <small *ngIf="trat.invalid && trat.touched" class="error-texto">El plan de tratamiento es obligatorio.</small>
-    </div>
- 
-    <div class="campo-grupo">
-      <label>Medicamentos (resumen):</label>
-      <textarea [(ngModel)]="consulta.medicamentos" name="medicamentos" required rows="2" #med="ngModel"></textarea>
-      <small *ngIf="med.invalid && med.touched" class="error-texto">Indica los medicamentos o coloca "Ninguno".</small>
-    </div>
- 
-    <div class="campo-grupo">
-      <label>Observaciones (opcional):</label>
-      <textarea [(ngModel)]="consulta.observaciones" name="observaciones" rows="2"></textarea>
-    </div>
- 
-    <div class="campo-grupo campo-checkbox">
+
       <label>
-        <input type="checkbox" [(ngModel)]="agregarReceta" name="agregarReceta">
-        Agregar receta médica detallada
+        Diagnóstico:
       </label>
+
+      <textarea
+
+        [(ngModel)]="consulta.diagnostico"
+        name="diagnostico"
+        required
+        rows="4"
+        #diag="ngModel">
+
+      </textarea>
+
+      <small 
+        *ngIf="diag.invalid && diag.touched"
+        class="error-texto">
+
+        El diagnóstico es obligatorio.
+
+      </small>
+
+
     </div>
- 
-    <div *ngIf="agregarReceta" class="seccion-receta">
-      <h4>Receta</h4>
- 
-      <div class="campo-grupo">
-        <label>Medicamento:</label>
-        <input type="text" [(ngModel)]="receta.medicamento" name="recetaMedicamento">
-      </div>
- 
-      <div class="campo-grupo">
-        <label>Dosis:</label>
-        <input type="text" [(ngModel)]="receta.dosis" name="recetaDosis" placeholder="Ej: 500mg">
-      </div>
- 
-      <div class="campo-grupo">
-        <label>Frecuencia:</label>
-        <input type="text" [(ngModel)]="receta.frecuencia" name="recetaFrecuencia" placeholder="Ej: Cada 8 horas">
-      </div>
- 
-      <div class="campo-grupo">
-        <label>Duración:</label>
-        <input type="text" [(ngModel)]="receta.duracion" name="recetaDuracion" placeholder="Ej: 7 días">
-      </div>
- 
-      <div class="campo-grupo">
-        <label>Indicaciones adicionales:</label>
-        <textarea [(ngModel)]="receta.indicaciones" name="recetaIndicaciones" rows="2"></textarea>
-      </div>
+
+    <div class="campo-grupo">
+
+      <label>
+        Plan de tratamiento:
+      </label>
+
+      <textarea
+
+        [(ngModel)]="consulta.tratamiento"
+        name="tratamiento"
+        required
+        rows="4"
+        #trat="ngModel">
+
+      </textarea>
+
+      <small
+        *ngIf="trat.invalid && trat.touched"
+        class="error-texto">
+
+        El tratamiento es obligatorio.
+
+      </small>
+
     </div>
- 
-    <button type="submit" [disabled]="formConsulta.invalid || !citaSeleccionada" class="btn btn-guardar">
-      Finalizar y Guardar Consulta
+
+    <div class="campo-grupo">
+
+      <label>
+        Observaciones:
+      </label>
+
+      <textarea
+
+        [(ngModel)]="consulta.observaciones"
+        name="observaciones"
+        rows="3">
+
+      </textarea>
+
+    </div>
+
+    <button
+    type="submit"
+    [disabled]="formConsulta.invalid || (!modoEdicion && !citaSeleccionada)"
+    class="btn btn-guardar">
+
+    {{modoEdicion ? 'Actualizar Consulta' : 'Guardar Consulta'}}
+
     </button>
- 
+
   </form>
+
 </div>

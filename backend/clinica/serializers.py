@@ -245,11 +245,42 @@ class CitaSerializer(serializers.ModelSerializer):
 # =========================
 # CONSULTAS
 # =========================
-
 class ConsultaSerializer(serializers.ModelSerializer):
+
+    receta = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Consulta
-        fields = '__all__'
+        fields = [
+            'id',
+            'cita',
+            'diagnostico',
+            'tratamiento',
+            'observaciones',
+            'fecha_consulta',
+            'receta'
+        ]
+        read_only_fields = [
+            'id',
+            'fecha_consulta',
+            'receta'
+        ]
+
+    def get_receta(self, obj):
+        try:
+            receta = obj.receta
+
+            return {
+                'id': receta.id,
+                'medicamento': receta.medicamento,
+                'dosis': receta.dosis,
+                'frecuencia': receta.frecuencia,
+                'duracion': receta.duracion,
+                'indicaciones': receta.indicaciones
+            }
+
+        except Receta.DoesNotExist:
+            return None
 
 
 
