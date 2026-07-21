@@ -1,104 +1,169 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { PacienteService } from '../../../../services/paciente.service';
+
 
 @Component({
   selector: 'app-formulario-paciente',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    RouterModule
+  ],
   templateUrl: './formulario-paciente.component.html',
   styleUrl: './formulario-paciente.component.css'
 })
 export class FormularioPacienteComponent implements OnInit {
 
-  paciente: any = {
-    dni: '',
-    nombres: '',
-    apellidos: '',
-    fecha_nacimiento: '', 
-    sexo: '',             
-    telefono: ''
+  paciente:any = {
+
+    dni:'',
+    nombres:'',
+    apellidos:'',
+    fecha_nacimiento:'',
+    sexo:'',
+    telefono:''
+
   };
 
-  // Control de edición
-  esEdicion: boolean = false;
-  idPaciente: number | null = null;
-  fechaMaxima: string = '';
+  esEdicion:boolean=false;
 
-  constructor(private pacienteService: PacienteService) {}
+  idPaciente:number|null=null;
 
-  ngOnInit(): void {
+  fechaMaxima:string='';
 
-    const hoy = new Date();
-    this.fechaMaxima = hoy.toISOString().split('T')[0];
-    
-    const data = this.pacienteService.getPacienteEditar();
-    if (data) {
-      this.paciente = { ...data};
-      this.esEdicion = true;
-      this.idPaciente = data.id!;
+  constructor(
+    private pacienteService:PacienteService,
+    private router:Router
+  ){}
 
-      // Limpiamos el servicio después de cargar
-      this.pacienteService.limpiarPacienteEditar();
-    } else {
-      // En caso no haya nada, aseguramos que el formulario esté limpio
-      this.reset();
+  ngOnInit():void{
+
+
+    const hoy=new Date();
+
+    this.fechaMaxima=hoy
+      .toISOString()
+      .split('T')[0];
+
+    const data=this.pacienteService.getPacienteEditar();
+
+    if(data){
+
+      this.paciente={
+        ...data
+      };
+
+
+      this.esEdicion=true;
+
+      this.idPaciente=data.id!;
+
+
+      this.pacienteService
+      .limpiarPacienteEditar();
+
+
     }
+
   }
 
-  // CREATE + UPDATE
-  guardarPaciente() {
-    // Modo Edición (PUT)
-    if (this.esEdicion && this.idPaciente) {
-      this.pacienteService.actualizarPaciente(this.idPaciente, this.paciente)
-        .subscribe({
-          next: () => {
-            alert('Paciente actualizado correctamente');
-            this.reset();
-          },
-          error: (err) => {
-            alert('Error al actualizar: Revisa la consola o las validaciones');
-            console.error(err);
-          }
-        });
-    } 
-    // Modo Creación (POST)
-    else {
-      this.pacienteService.crearPaciente(this.paciente)
-        .subscribe({
-          next: () => {
-            alert('Paciente registrado correctamente');
-            this.reset();
-          },
-          error: (err) => {
-            alert('Error al registrar: Revisa que el DNI/Teléfono cumplan el formato');
-            console.error(err);
-          }
-        });
+  guardarPaciente():void{
+
+
+    if(this.esEdicion && this.idPaciente){
+
+
+      this.pacienteService
+      .actualizarPaciente(
+        this.idPaciente,
+        this.paciente
+      )
+      .subscribe({
+
+
+        next:()=>{
+
+
+          alert(
+            'Paciente actualizado correctamente'
+          );
+
+
+          this.router.navigate([
+            '/admin/pacientes'
+          ]);
+
+
+        },
+
+        error:(err)=>{
+
+          console.error(err);
+
+          alert(
+            'Error al actualizar paciente'
+          );
+
+        }
+
+
+      });
+
+      return;
+
     }
+
+    this.pacienteService
+    .crearPaciente(
+      this.paciente
+    )
+    .subscribe({
+
+
+      next:()=>{
+
+
+        alert(
+          'Paciente registrado correctamente'
+        );
+
+
+        this.router.navigate([
+          '/admin/pacientes'
+        ]);
+
+
+      },
+
+      error:(err)=>{
+
+        console.error(err);
+
+        alert(
+          'Error al registrar paciente'
+        );
+
+      }
+
+    });
+
   }
 
-  // Activar modo edición desde la lista
-  editarPaciente(p: any) {
-    this.paciente = { ...p }; // Copia superficial del objeto
-    this.idPaciente = p.id;
-    this.esEdicion = true;
-  }
+  editarPaciente(p:any):void{
 
-  // Limpiar formulario y restablecer estados
-  reset() {
-    this.paciente = {
-      dni: '',
-      nombres: '',
-      apellidos: '',
-      fecha_nacimiento: '',
-      sexo: '',
-      telefono: ''
+    this.paciente={
+      ...p
     };
-    this.esEdicion = false;
-    this.idPaciente = null;
+
+
+    this.idPaciente=p.id;
+
+    this.esEdicion=true;
   }
+
 }
