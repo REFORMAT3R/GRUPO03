@@ -48,20 +48,29 @@ class DoctorViewSet(viewsets.ModelViewSet):
 
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
+    permission_classes = [EsAdminORecepcion]
 
-    # Admin y recepción pueden consultar doctores
-    permission_classes = [
-        EsAdminORecepcion
-    ]
+    def destroy(self, request, *args, **kwargs):
+
+        doctor = self.get_object()
+
+        doctor.usuario.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class PersonalViewSet(viewsets.ModelViewSet):
 
     queryset = Personal.objects.all()
     serializer_class = PersonalSerializer
+    permission_classes = [EsAdminORecepcion]
 
-    permission_classes = [
-        EsAdminORecepcion
-    ]
+    def destroy(self, request, *args, **kwargs):
+
+        personal = self.get_object()
+
+        personal.usuario.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class RegistrarDoctorView(APIView):
 
