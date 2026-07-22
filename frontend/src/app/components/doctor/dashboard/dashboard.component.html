@@ -43,4 +43,62 @@
         </div>
  
     </section>
+
+    <section class="listas-doctor">
+ 
+        <div class="tarjeta-clinica">
+            <div class="cabecera-tabla">
+                <h3>Mis Próximas Citas</h3>
+                <a class="btn btn-nuevo" routerLink="/doctor/mis-citas">Ver todas</a>
+            </div>
+            <table class="tabla-datos">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Paciente</th>
+                        <th>Motivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let c of proximasCitas">
+                        <td>{{ c.fecha }}</td>
+                        <td>{{ c.hora }}</td>
+                        <td class="texto-negrita">{{ nombrePaciente(c.paciente) }}</td>
+                        <td>{{ c.motivo || 'Consulta General' }}</td>
+                    </tr>
+                    <tr *ngIf="proximasCitas.length === 0">
+                        <td colspan="4" class="tabla-vacia">No tienes citas próximas.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+ 
+        <div class="tarjeta-clinica">
+            <div class="cabecera-tabla">
+                <h3>Mis Últimas Consultas</h3>
+                <a class="btn btn-nuevo" routerLink="/doctor/consultas">Ver todas</a>
+            </div>
+            <table class="tabla-datos">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Diagnóstico</th>
+                        <th>Tratamiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let c of ultimasConsultas">
+                        <td>{{ c.fecha_consulta | date:'dd/MM/yyyy' }}</td>
+                        <td class="texto-negrita">{{ c.diagnostico }}</td>
+                        <td>{{ c.tratamiento }}</td>
+                    </tr>
+                    <tr *ngIf="ultimasConsultas.length === 0">
+                        <td colspan="3" class="tabla-vacia">Aún no registras consultas.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+ 
+    </section>
 </div>

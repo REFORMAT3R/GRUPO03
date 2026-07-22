@@ -1,134 +1,179 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { PersonalService } from '../../../../services/personal.service';
 
 @Component({
   selector: 'app-formulario-personal',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    RouterModule
+  ],
   templateUrl: './formulario-personal.component.html',
   styleUrl: './formulario-personal.component.css'
 })
 export class FormularioPersonalComponent implements OnInit {
 
-  personal: any = {
-    username: '',
-    password: '',
-    nombres: '',
-    apellidos: '',
-    rol: '',
-    telefono: ''
+  personal:any = {
+    username:'',
+    password:'',
+    nombres:'',
+    apellidos:'',
+    rol:'',
+    telefono:''
   };
 
-  esEdicion: boolean = false;
-  idPersonal: number | null = null;
+  esEdicion:boolean=false;
 
-  constructor(private personalService: PersonalService) {}
+  idPersonal:number|null=null;
 
-  ngOnInit(): void {
 
-    const data = this.personalService.getPersonalEditar();
+  constructor(
+    private personalService:PersonalService,
+    private router:Router
+  ){}
 
-    if (data) {
 
-      this.personal = {
+  ngOnInit():void{
+
+
+    const data=this.personalService.getPersonalEditar();
+
+
+    if(data){
+
+
+      this.personal={
         ...data,
-        password: '' // nunca mostramos la contraseña
+        password:''
       };
 
-      this.esEdicion = true;
-      this.idPersonal = data.id!;
 
-      this.personalService.limpiarPersonalEditar();
+      this.esEdicion=true;
 
-    } else {
+      this.idPersonal=data.id!;
 
-      this.reset();
+
+      this.personalService
+      .limpiarPersonalEditar();
+
 
     }
+
 
   }
 
-  guardarPersonal() {
+  guardarPersonal():void{
 
-    // EDITAR
-    if (this.esEdicion && this.idPersonal) {
 
-      this.personalService.actualizarPersonal(this.idPersonal, this.personal)
-        .subscribe({
+    if(this.esEdicion && this.idPersonal){
 
-          next: () => {
 
-            alert('Personal actualizado correctamente');
-            this.reset();
+      this.personalService
+      .actualizarPersonal(
+        this.idPersonal,
+        this.personal
+      )
+      .subscribe({
 
-          },
 
-          error: (err) => {
+        next:()=>{
 
-            alert('Error al actualizar el personal');
-            console.error(err);
 
-          }
+          alert(
+            'Personal actualizado correctamente'
+          );
 
-        });
+
+          this.router.navigate([
+            '/admin/personal'
+          ]);
+
+
+        },
+
+
+        error:(err)=>{
+
+
+          console.error(err);
+
+
+          alert(
+            'Error al actualizar el personal'
+          );
+
+
+        }
+
+
+      });
+
+
+
+      return;
+
 
     }
 
-    // CREAR
-    else {
+    this.personalService
+    .registrarPersonal(
+      this.personal
+    )
+    .subscribe({
 
-      this.personalService.registrarPersonal(this.personal)
-        .subscribe({
 
-          next: () => {
+      next:()=>{
 
-            alert('Personal registrado correctamente');
-            this.reset();
 
-          },
+        alert(
+          'Personal registrado correctamente'
+        );
 
-          error: (err) => {
 
-            alert('Error al registrar el personal');
-            console.error(err);
+        this.router.navigate([
+          '/admin/personal'
+        ]);
 
-          }
 
-        });
+      },
 
-    }
+      error:(err)=>{
+
+
+        console.error(err);
+
+
+        alert(
+          'Error al registrar el personal'
+        );
+
+
+      }
+
+
+    });
+
+
 
   }
 
-  editarPersonal(p: any) {
+  editarPersonal(p:any):void{
 
-    this.personal = {
+
+    this.personal={
       ...p,
-      password: ''
+      password:''
     };
 
-    this.idPersonal = p.id;
-    this.esEdicion = true;
 
-  }
+    this.idPersonal=p.id;
 
-  reset() {
-
-    this.personal = {
-      username: '',
-      password: '',
-      nombres: '',
-      apellidos: '',
-      rol: '',
-      telefono: ''
-    };
-
-    this.esEdicion = false;
-    this.idPersonal = null;
+    this.esEdicion=true;
 
   }
 

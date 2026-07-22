@@ -36,18 +36,18 @@ export class ListaPacientesComponent implements OnInit {
     this.pacienteService.getPacientes()
       .subscribe({
         next: (data) => {
-          console.log('🟢 DATA REAL:', data);
+          console.log('DATA REAL:', data);
           this.pacientes = data;
           this.cdr.detectChanges();
         },
         error: (err) => {
-          console.log('🔴 ERROR:', err);
+          console.log('ERROR:', err);
         }
       });
   }
 
   eliminarPaciente(id: number) {
-    if (confirm('¿Desea eliminar este registro de la clínica Moisés Heresi?')) {
+    if (confirm('¿Desea eliminar este registro de Mendly?')) {
       this.pacienteService.eliminarPaciente(id)
         .subscribe(() => {
           this.cargarPacientes();

@@ -67,6 +67,8 @@ export class RegistrarConsultasComponent implements OnInit {
 
       this.modoEdicion=true;
 
+      this.consultaService.limpiarConsultaEditar();
+
       return;
 
     }
