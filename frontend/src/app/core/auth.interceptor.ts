@@ -3,9 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, switchMap, throwError } from 'rxjs';
- 
-const REFRESH_URL = 'http://localhost:8000/api/token/refresh/';
- 
+import { environment } from '../../environments/environment';
+
+const REFRESH_URL = `${environment.apiUrl}/token/refresh/`;
+
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const http = inject(HttpClient);
   const router = inject(Router);

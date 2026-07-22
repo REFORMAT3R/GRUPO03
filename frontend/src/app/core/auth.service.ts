@@ -2,9 +2,9 @@ import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, switchMap, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export type Rol = 'DOCTOR' | 'ADMIN' | 'RECEPCION';
-
 
 export interface PerfilUsuario {
   tipo: 'doctor' | 'personal';
@@ -15,12 +15,10 @@ export interface PerfilUsuario {
   rol: Rol;
 }
 
-
 interface TokenResponse {
   access: string;
   refresh: string;
 }
-
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +28,8 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-
-  private readonly tokenUrl = 'http://localhost:8000/api/token/';
-  private readonly perfilUrl = 'http://localhost:8000/api/perfil/';
-
+  private readonly tokenUrl = `${environment.apiUrl}/token/`;
+  private readonly perfilUrl = `${environment.apiUrl}/perfil/`;
 
   perfil = signal<PerfilUsuario | null>(
     this.cargarPerfilGuardado()
