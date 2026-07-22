@@ -33,4 +33,61 @@
     </div>
   </section>
  
+  <section class="listas-recepcion">
+ 
+    <div class="tarjeta-clinica">
+      <div class="cabecera-tabla">
+        <h3>Próximas Citas</h3>
+        <a class="btn btn-nuevo" routerLink="/recepcionista/nueva-cita">+ Nueva Cita</a>
+      </div>
+      <table class="tabla-datos">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Paciente</th>
+            <th>Doctor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of proximasCitas">
+            <td>{{ c.fecha }}</td>
+            <td>{{ c.hora }}</td>
+            <td class="texto-negrita">{{ nombrePaciente(c.paciente) }}</td>
+            <td>{{ nombreDoctor(c.doctor) }}</td>
+          </tr>
+          <tr *ngIf="proximasCitas.length === 0">
+            <td colspan="4" class="tabla-vacia">No hay citas registradas.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+ 
+    <div class="tarjeta-clinica">
+      <div class="cabecera-tabla">
+        <h3>Últimos Pacientes Registrados</h3>
+        <a class="btn btn-nuevo" routerLink="/recepcionista/nuevo-paciente">+ Nuevo Paciente</a>
+      </div>
+      <table class="tabla-datos">
+        <thead>
+          <tr>
+            <th>Nombres</th>
+            <th>DNI</th>
+            <th>Teléfono</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of ultimosPacientes">
+            <td class="texto-negrita">{{ p.nombres }} {{ p.apellidos }}</td>
+            <td>{{ p.dni }}</td>
+            <td>{{ p.telefono || 'Sin registrar' }}</td>
+          </tr>
+          <tr *ngIf="ultimosPacientes.length === 0">
+            <td colspan="3" class="tabla-vacia">No hay pacientes registrados.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+ 
+  </section>
 </div>
