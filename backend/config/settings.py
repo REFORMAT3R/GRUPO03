@@ -139,9 +139,9 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 CORS_ALLOWED_ORIGINS = [
-    "https://mendly-xv3a.onrender.com",
+    "https://grupo03.onrender.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://mendly-xv3a.onrender.com",
+    "https://grupo03.onrender.com",
 ]
