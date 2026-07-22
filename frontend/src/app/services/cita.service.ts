@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { Cita } from '../models/cita';
 import { Paciente } from '../models/paciente';
 import { Doctor } from '../models/doctor';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CitaService {
 
-  private apiUrl = 'http://localhost:8000/api/citas/';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -29,26 +30,26 @@ export class CitaService {
   }
 
   getCitas(): Observable<Cita[]> {
-    return this.http.get<Cita[]>(this.apiUrl);
+    return this.http.get<Cita[]>(`${this.apiUrl}/citas/`);
   }
 
   getPacientes(): Observable<Paciente[]> {
-    return this.http.get<Paciente[]>('http://localhost:8000/api/pacientes/');
+    return this.http.get<Paciente[]>(`${this.apiUrl}/pacientes/`);
   }
 
   getDoctores(): Observable<Doctor[]> {
-    return this.http.get<Doctor[]>('http://localhost:8000/api/doctores/');
+    return this.http.get<Doctor[]>(`${this.apiUrl}/doctores/`);
   }
 
   crearCita(cita: Cita): Observable<Cita> {
-    return this.http.post<Cita>(this.apiUrl, cita);
+    return this.http.post<Cita>(`${this.apiUrl}/citas/`, cita);
   }
 
   actualizarCita(id: number, cita: Cita): Observable<Cita> {
-    return this.http.put<Cita>(`${this.apiUrl}${id}/`, cita);
+    return this.http.put<Cita>(`${this.apiUrl}/citas/${id}/`, cita);
   }
 
   eliminarCita(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}${id}/`);
+    return this.http.delete(`${this.apiUrl}/citas/${id}/`);
   }
 }

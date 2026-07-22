@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../environments/environment';
 import { Personal } from '../models/personal';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonalService {
 
-  private apiUrl = 'http://localhost:8000/api/personal/';
-  private registrarUrl = 'http://localhost:8000/api/personal/registrar/';
+  private apiUrl = environment.apiUrl;
+  private registrarUrl = `${environment.apiUrl}/personal/registrar/`;
 
   constructor(private http: HttpClient) {}
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
 export class DoctorService {
 
 
-  private apiUrl = 'http://localhost:8000/api/doctores/';
+  private apiUrl = environment.apiUrl;
   
-  private registrarUrl = 'http://localhost:8000/api/doctores/registrar/';
+  private registrarUrl = `${environment.apiUrl}/doctores/registrar/`;
 
 
   constructor(
