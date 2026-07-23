@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Personal } from '../models/personal';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -38,7 +37,7 @@ export class PersonalService {
   // ==========================
 
   getPersonal(): Observable<Personal[]> {
-    return this.http.get<Personal[]>(this.apiUrl);
+    return this.http.get<Personal[]>(`${this.apiUrl}/personal/`);
   }
 
   registrarPersonal(datos: {
@@ -54,11 +53,10 @@ export class PersonalService {
   }
 
   actualizarPersonal(id: number, personal: Personal): Observable<Personal> {
-    return this.http.put<Personal>(`${this.apiUrl}${id}/`, personal);
+    return this.http.put<Personal>(`${this.apiUrl}/personal/${id}/`, personal);
   }
 
   eliminarPersonal(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}${id}/`);
+    return this.http.delete(`${this.apiUrl}/personal/${id}/`);
   }
-
 }
