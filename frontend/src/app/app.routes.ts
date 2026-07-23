@@ -57,7 +57,7 @@ export const routes: Routes = [
     rolGuard
   ],
   data:{
-    roles:['ADMIN']
+    roles:['ADMIN','RECEPCION']
   },
   children:[
 
