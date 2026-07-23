@@ -8,37 +8,37 @@ import { environment } from '../../environments/environment';
 })
 export class ConsultaService {
 
-  private apiUrl = environment.apiUrl; 
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
   private consultaEditar: any = null;
 
-  setConsultaEditar(c: any) { 
-    this.consultaEditar = c; 
+  setConsultaEditar(c: any) {
+    this.consultaEditar = c;
   }
 
-  getConsultaEditar() { 
-    return this.consultaEditar; 
+  getConsultaEditar() {
+    return this.consultaEditar;
   }
 
-  limpiarConsultaEditar() { 
-    this.consultaEditar = null; 
+  limpiarConsultaEditar() {
+    this.consultaEditar = null;
   }
-  
+
   getConsultas(): Observable<any> {
-    return this.http.get(this.apiUrl);
+    return this.http.get(`${this.apiUrl}/consultas/`);
   }
 
   crearConsulta(consulta: any): Observable<any> {
-    return this.http.post(this.apiUrl, consulta);
+    return this.http.post(`${this.apiUrl}/consultas/`, consulta);
   }
 
   actualizarConsulta(id: number, consulta: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}${id}/`, consulta);
+    return this.http.put(`${this.apiUrl}/consultas/${id}/`, consulta);
   }
 
   eliminarConsulta(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}${id}/`);
+    return this.http.delete(`${this.apiUrl}/consultas/${id}/`);
   }
 }
