@@ -1,37 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from '../../environments/environment';
 import { Receta } from '../models/receta';
- 
+
 @Injectable({
   providedIn: 'root'
 })
 export class RecetaService {
- 
+
   private apiUrl = environment.apiUrl;
- 
+
   constructor(private http: HttpClient) {}
- 
+
   private recetaEditar: Receta | null = null;
- 
+
   setRecetaEditar(r: Receta): void {
     this.recetaEditar = r;
   }
- 
+
   getRecetaEditar(): Receta | null {
     return this.recetaEditar;
   }
- 
+
   limpiarRecetaEditar(): void {
     this.recetaEditar = null;
   }
- 
+
   getRecetas(): Observable<Receta[]> {
-    return this.http.get<Receta[]>(this.apiUrl);
+    return this.http.get<Receta[]>(`${this.apiUrl}/recetas/`);
   }
- 
-  
+
   getRecetasPorConsulta(consultaId: number): Observable<Receta[]> {
     return new Observable<Receta[]>(observer => {
       this.getRecetas().subscribe({
@@ -43,37 +42,30 @@ export class RecetaService {
       });
     });
   }
- 
+
   crearReceta(receta: Receta): Observable<Receta> {
-    return this.http.post<Receta>(this.apiUrl, receta);
+    return this.http.post<Receta>(`${this.apiUrl}/recetas/`, receta);
   }
- 
+
   actualizarReceta(id: number, receta: Receta): Observable<Receta> {
-    return this.http.put<Receta>(`${this.apiUrl}${id}/`, receta);
+    return this.http.put<Receta>(`${this.apiUrl}/recetas/${id}/`, receta);
   }
- 
+
   eliminarReceta(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}${id}/`);
+    return this.http.delete(`${this.apiUrl}/recetas/${id}/`);
   }
 
-  private consultaParaReceta:any=null;
+  private consultaParaReceta: any = null;
 
-  setConsultaRecetaCrear(id:number){
-
-    this.consultaParaReceta=id;
-
+  setConsultaRecetaCrear(id: number) {
+    this.consultaParaReceta = id;
   }
 
-  getConsultaRecetaCrear(){
-
+  getConsultaRecetaCrear() {
     return this.consultaParaReceta;
-
   }
 
-  limpiarConsultaRecetaCrear(){
-
-    this.consultaParaReceta=null;
-
+  limpiarConsultaRecetaCrear() {
+    this.consultaParaReceta = null;
   }
 }
-
