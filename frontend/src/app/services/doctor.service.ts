@@ -8,104 +8,46 @@ import { environment } from '../../environments/environment';
 })
 export class DoctorService {
 
-
   private apiUrl = environment.apiUrl;
-  
   private registrarUrl = `${environment.apiUrl}/doctores/registrar/`;
 
-
-  constructor(
-    private http: HttpClient
-  ) {}
-
-
+  constructor(private http: HttpClient) {}
 
   // ==========================
   // CONTROL DE EDICIÓN
   // ==========================
 
-
   private doctorEditar: any = null;
 
-
-  setDoctorEditar(d:any){
-
+  setDoctorEditar(d: any) {
     this.doctorEditar = d;
-
   }
 
-
-  getDoctorEditar(){
-
+  getDoctorEditar() {
     return this.doctorEditar;
-
   }
 
-
-  limpiarDoctorEditar(){
-
+  limpiarDoctorEditar() {
     this.doctorEditar = null;
-
   }
-
-
 
   // ==========================
   // CRUD DOCTOR
   // ==========================
 
-
-  // Obtener doctores
-
-  getDoctores(): Observable<any[]>{
-
-    return this.http.get<any[]>(this.apiUrl);
-
+  getDoctores(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/doctores/`);
   }
 
-
-
-
-  // Registrar doctor con usuario Django
-
-  crearDoctor(doctor:any): Observable<any>{
-
-    return this.http.post<any>(
-      this.registrarUrl,
-      doctor
-    );
-
+  crearDoctor(doctor: any): Observable<any> {
+    return this.http.post<any>(this.registrarUrl, doctor);
   }
 
-
-
-
-  // Actualizar doctor
-
-  actualizarDoctor(
-    id:number,
-    doctor:any
-  ):Observable<any>{
-
-    return this.http.put<any>(
-      `${this.apiUrl}${id}/`,
-      doctor
-    );
-
+  actualizarDoctor(id: number, doctor: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/doctores/${id}/`, doctor);
   }
 
-
-
-
-  // Eliminar doctor
-
-  eliminarDoctor(id:number):Observable<any>{
-
-    return this.http.delete<any>(
-      `${this.apiUrl}${id}/`
-    );
-
+  eliminarDoctor(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/doctores/${id}/`);
   }
-
-
 }
