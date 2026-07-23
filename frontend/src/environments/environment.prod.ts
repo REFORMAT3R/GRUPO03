@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://mendly-xv3a.onrender.com'  
+  apiUrl: 'https://mendly-xv3a.onrender.com/api'  
 };
