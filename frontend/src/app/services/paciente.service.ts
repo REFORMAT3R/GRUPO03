@@ -26,7 +26,10 @@ export class PacienteService {
   limpiarPacienteEditar() {
     this.pacienteEdit = null;
   }
-
+  getDoctores(): Observable<any[]>{
+  return this.http.get<any[]>(`${this.apiUrl}/doctores/`);  
+  }
+  
   getPacientes(): Observable<Paciente[]> {
     return this.http.get<Paciente[]>(`${this.apiUrl}/pacientes/`);
   }
